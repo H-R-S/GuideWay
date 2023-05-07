@@ -1,0 +1,1 @@
+const String guideWayLogo = "assets/logos/guide_way_logo.png";
