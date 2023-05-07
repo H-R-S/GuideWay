@@ -1,0 +1,10 @@
+const String usaFlag = "assets/flags/usa_flag.png";
+const String canadaFlag = "assets/flags/canada_flag.png";
+const String franceFlag = "assets/flags/france_flag.png";
+const String germanyFlag = "assets/flags/germany_flag.png";
+const String japanFlag = "assets/flags/japan_flag.png";
+const String norwayFlag = "assets/flags/norway_flag.png";
+const String australiaFlag = "assets/flags/australia_flag.jpg";
+const String southKoreaFlag = "assets/flags/south_korea_flag.png";
+const String swedenFlag = "assets/flags/sweden_flag.png";
+const String ukFlag = "assets/flags/uk_flag.png";
