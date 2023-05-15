@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:guide_way/resources/constants/icons.dart';
-import 'package:guide_way/resources/constants/style.dart';
+import 'package:guide_way/routes/routes_name.dart';
 import 'package:guide_way/view/widgets/app_bar/my_app_bar.dart';
-
 import '../../widgets/profile_container/profile_container.dart';
 import '../../widgets/settings_container/settings_container.dart';
 
 class SettingsScreen extends StatelessWidget {
   SettingsScreen({super.key});
 
-  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,9 @@ class SettingsScreen extends StatelessWidget {
               icon: logoutIcon,
               title: "Logout",
               subTitle: "Logout from the App",
-              onTap: () {}),
+              onTap: () {
+                Navigator.pushReplacementNamed(context, RoutesName.login);
+              }),
           SettingsContainer(
               icon: notificationIcon,
               title: "Notification",
