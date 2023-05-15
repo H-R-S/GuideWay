@@ -7,7 +7,7 @@ import '../login/login_screen.dart';
 class OnBoardingScreen extends StatelessWidget {
   OnBoardingScreen({super.key});
 
-  List<OnBoardingModel> list = [
+  final List<OnBoardingModel> list = [
     OnBoardingModel(
         title: "Explore the world like a local with GuideWay!",
         subTitle:
