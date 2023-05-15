@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:guide_way/view/widgets/dialog/animated_dialog.dart';
 import '../../widgets/button/my_elevated_button.dart';
 import '../../widgets/dialog/forgot_dialog.dart';
 import '../../widgets/tag/main_tag.dart';
@@ -7,7 +8,7 @@ import '../../widgets/text_field/my_text_field.dart';
 class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordScreen({super.key});
 
-  TextEditingController emailController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,9 @@ class ForgotPasswordScreen extends StatelessWidget {
         })),
         body: Padding(
             padding: const EdgeInsets.all(20).copyWith(top: 40),
-            child: Column(children: [
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
               const MainTag(
                   title: "Forgot Password",
                   subTitle: "Enter your email account to reset your password"),
@@ -27,9 +30,9 @@ class ForgotPasswordScreen extends StatelessWidget {
               MyElevatedButton(
                   title: "Reset Password",
                   onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) => const ForgotDialog());
+                    AnimatedDialog(context: context, 
+                    endOffSet: const Offset(0,0),
+                    child: const ForgotDialog());
                   })
             ])));
   }
