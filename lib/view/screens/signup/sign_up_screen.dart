@@ -10,9 +10,9 @@ import '../../widgets/text_field/my_text_field.dart';
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
 
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
