@@ -6,14 +6,14 @@ import '../../widgets/info_container/info_container.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
-  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-        appBar: MyAppBar(scaffoldKey, context),
+        appBar: MyAppBar(scaffoldKey, context, title: "GuideWay"),
         body: SingleChildScrollView(
           child: Padding(
               padding: const EdgeInsets.all(20).copyWith(top: 40),
