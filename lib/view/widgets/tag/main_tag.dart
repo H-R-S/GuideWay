@@ -9,13 +9,13 @@ class MainTag extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       FittedBox(
-        child: Text(title,
-            style: const TextStyle(fontSize: 35, fontWeight: FontWeight.w900)),
-      ),
+          child: Text(title,
+              style:
+                  const TextStyle(fontSize: 25, fontWeight: FontWeight.bold))),
       Text(subTitle,
           textAlign: TextAlign.center,
           style: const TextStyle(
-              fontSize: 20, fontWeight: FontWeight.normal, color: Colors.grey)),
+              fontSize: 18, fontWeight: FontWeight.normal, color: Colors.grey)),
     ]);
   }
 }
