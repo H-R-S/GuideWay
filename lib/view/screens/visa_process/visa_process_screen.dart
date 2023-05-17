@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:guide_way/resources/constants/style.dart';
-import 'package:guide_way/view/widgets/app_bar/my_app_bar.dart';
+import '../../../resources/data/visa_process.dart';
+import '../../widgets/app_bar/my_app_bar.dart';
+import '../../widgets/visa_process/visa_process_container.dart';
 
 class VisaProcessScreen extends StatelessWidget {
   VisaProcessScreen({super.key});
@@ -10,54 +11,18 @@ class VisaProcessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: MyAppBar(scaffoldKey, context, title: "Visa Process"),
-        body: const Padding(
-            padding: EdgeInsets.all(20),
-            child: Column(children: [
-              Row(children: [
-                CircleAvatar(
-                    backgroundColor: primaryLight,
-                    radius: 30,
-                    child: Icon(Icons.circle_outlined)),
-                SizedBox(width: 10),
-                Text("Step 01")
-              ]),
-              SizedBox(height: 20),
-              Row(children: [
-                CircleAvatar(
-                    backgroundColor: primaryLight,
-                    radius: 30,
-                    child: Icon(Icons.circle_outlined)),
-                SizedBox(width: 10),
-                Text("Step 02"),
-              ]),
-              SizedBox(height: 20),
-              Row(children: [
-                CircleAvatar(
-                    backgroundColor: primaryLight,
-                    radius: 30,
-                    child: Icon(Icons.circle_outlined)),
-                SizedBox(width: 10),
-                Text("Step 03"),
-              ]),
-              SizedBox(height: 20),
-              Row(children: [
-                CircleAvatar(
-                    backgroundColor: primaryLight,
-                    radius: 30,
-                    child: Icon(Icons.circle_outlined)),
-                SizedBox(width: 10),
-                Text("Step 04"),
-              ]),
-              SizedBox(height: 20),
-              Row(children: [
-                CircleAvatar(
-                    backgroundColor: primaryLight,
-                    radius: 30,
-                    child: Icon(Icons.circle_outlined)),
-                SizedBox(width: 10),
-                Text("Step 05"),
-              ])
-            ])));
+        appBar: MyAppBar(scaffoldKey, context, title: "Visa Process FAQ"),
+        body: Padding(
+            padding: const EdgeInsets.all(20),
+            child: ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: visaProcess.length,
+                itemBuilder: (context, index) {
+                  return VisaProcessContainer(
+                      title: visaProcess[index]["title"],
+                      subTitle: visaProcess[index]["subTitle"],
+                      icon: visaProcess[index]["icon"]);
+                })));
   }
 }
