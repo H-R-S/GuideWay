@@ -15,11 +15,12 @@ class ProfileContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const style = TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
+    const style = TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
 
     return Container(
         margin: const EdgeInsets.all(20),
         padding: const EdgeInsets.all(20),
+        width: double.infinity,
         decoration: BoxDecoration(
             color: primaryLight,
             boxShadow: const [
@@ -32,18 +33,21 @@ class ProfileContainer extends StatelessWidget {
             borderRadius: BorderRadius.circular(20)),
         child: Row(children: [
           const CircleAvatar(
-              radius: 50,
+              radius: 40,
               backgroundColor: Colors.white,
               backgroundImage: AssetImage(personIcon)),
           const SizedBox(width: 20),
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(name, style: style),
-            const SizedBox(height: 5),
-            Text(userName,
-                style: style.copyWith(fontWeight: FontWeight.normal)),
-            const SizedBox(height: 5),
-            Text(email, style: style)
-          ])
+          FittedBox(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                Text(name, style: style),
+                const SizedBox(height: 5),
+                Text(userName,
+                    style: style.copyWith(fontWeight: FontWeight.normal)),
+                const SizedBox(height: 5),
+                Text(email, style: style)
+              ]))
         ]));
   }
 }
