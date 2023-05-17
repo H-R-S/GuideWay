@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class SettingsContainer extends StatelessWidget {
   final bool isHeader;
   final String? title;
@@ -35,7 +36,7 @@ class SettingsContainer extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(children: [
-                        SizedBox(height: 40, child: Image.asset(icon)),
+                        SizedBox(height: 30, child: Image.asset(icon)),
                         Padding(
                             padding: const EdgeInsets.all(10)
                                 .copyWith(left: 30, top: 20),
@@ -46,8 +47,14 @@ class SettingsContainer extends StatelessWidget {
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 18)),
-                                  Text(subTitle ?? "",
-                                      style: const TextStyle(fontSize: 16))
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.65,
+                                    child: Text(subTitle ?? "",
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(fontSize: 16)),
+                                  )
                                 ]))
                       ]),
                       if (onTap != null)
