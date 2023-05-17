@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-        appBar: MyAppBar(scaffoldKey, context, title: "GuideWay"),
+        appBar: MyAppBar(scaffoldKey, context, isHome: true),
         body: SingleChildScrollView(
           child: Padding(
               padding: const EdgeInsets.all(20).copyWith(top: 40),
