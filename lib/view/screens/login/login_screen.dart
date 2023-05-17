@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../resources/constants/icons.dart';
+import '../../../routes/routes_name.dart';
 import '../../widgets/button/forgot_password_button.dart';
 import '../../widgets/button/my_circle_button.dart';
 import '../../widgets/button/my_elevated_button.dart';
@@ -20,6 +21,13 @@ class LoginScreen extends StatelessWidget {
             padding: const EdgeInsets.all(20).copyWith(top: 40),
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Image.asset(guideWayIcon, height: 50),
+                const SizedBox(width: 20),
+                const Text("GuideWay",
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold))
+              ]),
+              const SizedBox(height: 40),
               const MainTag(
                   title: "Sign in now",
                   subTitle: "Please sign in to continue our app"),
@@ -32,7 +40,11 @@ class LoginScreen extends StatelessWidget {
                   hint: "Password"),
               const ForgotPasswordButton(),
               const SizedBox(height: 40),
-              MyElevatedButton(title: "Sign In", onTap: () {}),
+              MyElevatedButton(
+                  title: "Sign In",
+                  onTap: () {
+                    Navigator.pushReplacementNamed(context, RoutesName.country);
+                  }),
               const SignUpButton(),
               const SizedBox(height: 40),
               const Text("or continue with"),
