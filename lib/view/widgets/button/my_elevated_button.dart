@@ -13,7 +13,7 @@ class MyElevatedButton extends StatelessWidget {
         onTap: onTap,
         child: Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(15).copyWith(top: 20),
+          padding: const EdgeInsets.symmetric(vertical: 15),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15), color: primary),
           child: Center(
@@ -21,7 +21,7 @@ class MyElevatedButton extends StatelessWidget {
                   style: const TextStyle(
                       color: Colors.white,
                       fontSize: 20,
-                      fontWeight: FontWeight.bold))),
+                      fontWeight: FontWeight.bold)))
         ));
   }
 }
