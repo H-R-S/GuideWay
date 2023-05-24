@@ -22,12 +22,16 @@ class VisaProcessContainer extends StatelessWidget {
               radius: 40,
               child: Image.asset(icon)),
           const SizedBox(width: 20),
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(title, style: style),
-            Text(subTitle, style: style.copyWith(
-              fontSize: 16,
-              fontWeight: FontWeight.normal))
-          ])
+          Expanded(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                Text(title,
+                    maxLines: 2, overflow: TextOverflow.ellipsis, style: style),
+                Text(subTitle,
+                    style: style.copyWith(
+                        fontSize: 16, fontWeight: FontWeight.normal))
+              ]))
         ]));
   }
 }
