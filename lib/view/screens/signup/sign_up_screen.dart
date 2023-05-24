@@ -27,7 +27,7 @@ class SignUpScreen extends StatelessWidget {
                 })),
             body: SingleChildScrollView(
                 child: Padding(
-                    padding: const EdgeInsets.all(20).copyWith(top: 40),
+                    padding: const EdgeInsets.all(20).copyWith(top: 50),
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -35,7 +35,7 @@ class SignUpScreen extends StatelessWidget {
                               title: "Sign Up now",
                               subTitle:
                                   "Please fill the details and create account"),
-                          const SizedBox(height: 40),
+                          const SizedBox(height: 20),
                           MyTextField(
                               controller: usernameController, hint: "Username"),
                           MyTextField(
@@ -45,7 +45,7 @@ class SignUpScreen extends StatelessWidget {
                               isVisible: true,
                               controller: passwordController,
                               hint: "Password"),
-                          const SizedBox(height: 40),
+                          const SizedBox(height: 20),
                           MyElevatedButton(
                               title: "Sign Up",
                               onTap: () {
@@ -53,9 +53,9 @@ class SignUpScreen extends StatelessWidget {
                                     context, RoutesName.country);
                               }),
                           const SignInButton(),
-                          const SizedBox(height: 40),
+                          const SizedBox(height: 20),
                           const Text("or continue with"),
-                          const SizedBox(height: 40),
+                          const SizedBox(height: 20),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
