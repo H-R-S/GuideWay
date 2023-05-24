@@ -17,16 +17,16 @@ class ForgotPasswordScreen extends StatelessWidget {
           Navigator.pop(context);
         })),
         body: Padding(
-            padding: const EdgeInsets.all(20).copyWith(top: 40),
+            padding: const EdgeInsets.all(20).copyWith(top: 50),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
               const MainTag(
                   title: "Forgot Password",
                   subTitle: "Enter your email account to reset your password"),
-              const SizedBox(height: 40),
+              const SizedBox(height: 20),
               MyTextField(controller: emailController, hint: "Email"),
-              const SizedBox(height: 40),
+              const SizedBox(height: 20),
               MyElevatedButton(
                   title: "Reset Password",
                   onTap: () {
