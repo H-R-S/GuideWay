@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../../resources/constants/style.dart';
+
 // ignore: must_be_immutable
-class SettingsContainer extends StatelessWidget {
+class SettingsContainer extends StatefulWidget {
   final bool isHeader;
   final String? title;
   final String? subTitle;
@@ -25,43 +27,59 @@ class SettingsContainer extends StatelessWidget {
       this.onTap});
 
   @override
+  State<SettingsContainer> createState() => _SettingsContainerState();
+}
+
+class _SettingsContainerState extends State<SettingsContainer> {
+  @override
   Widget build(BuildContext context) {
     return Container(
         margin: const EdgeInsets.symmetric(vertical: 5),
         child: InkWell(
-            onTap: onTap,
+            onTap: widget.onTap,
             child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(children: [
-                        SizedBox(height: 30, child: Image.asset(icon)),
+                        SizedBox(
+                            height: 30, width: 30, child: Image.asset(widget.icon)),
                         Padding(
                             padding: const EdgeInsets.all(10)
                                 .copyWith(left: 30, top: 20),
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(title ?? "",
+                                  Text(widget.title ?? "",
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 18)),
                                   SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.65,
-                                    child: Text(subTitle ?? "",
+                                    width: MediaQuery.of(context).size.width *
+                                        0.65,
+                                    child: Text(widget.subTitle ?? "",
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                         style: const TextStyle(fontSize: 16)),
                                   )
                                 ]))
                       ]),
-                      if (onTap != null)
-                        isSwitch
-                            ? Switch(value: false, onChanged: (value) {})
-                            : const Icon(Icons.arrow_forward_ios,
-                                size: 20, color: Colors.grey)
+                        widget.isSwitch
+                            ? Container(
+                                height: 20,
+                                width: 20,
+                                padding: const EdgeInsets.only(right: 20),
+                                child: Switch(
+                                    activeTrackColor: primary,
+                                    value: widget.isDark,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        widget.isDark = value;
+                                      });
+                                    }))
+                            : widget.onTap != null ? const Icon(Icons.arrow_forward_ios,
+                                size: 20, color: Colors.grey) : const SizedBox()
                     ]))));
   }
 }
