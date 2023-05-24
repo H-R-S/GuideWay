@@ -18,20 +18,20 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Padding(
-            padding: const EdgeInsets.all(20).copyWith(top: 40),
+            padding: const EdgeInsets.all(20).copyWith(top: 50),
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Image.asset(guideWayIcon, height: 50),
                 const SizedBox(width: 20),
                 const Text("GuideWay",
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold))
+                    style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))
               ]),
               const SizedBox(height: 40),
               const MainTag(
                   title: "Sign in now",
                   subTitle: "Please sign in to continue our app"),
-              const SizedBox(height: 40),
+              const SizedBox(height: 20),
               MyTextField(controller: emailController, hint: "Email"),
               MyTextField(
                   isPassword: true,
@@ -39,16 +39,16 @@ class LoginScreen extends StatelessWidget {
                   controller: passwordController,
                   hint: "Password"),
               const ForgotPasswordButton(),
-              const SizedBox(height: 40),
+              const SizedBox(height: 20),
               MyElevatedButton(
                   title: "Sign In",
                   onTap: () {
                     Navigator.pushReplacementNamed(context, RoutesName.country);
                   }),
               const SignUpButton(),
-              const SizedBox(height: 40),
+              const SizedBox(height: 20),
               const Text("or continue with"),
-              const SizedBox(height: 40),
+              const SizedBox(height: 20),
               Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
                 MyCircleButton(icon: googleIcon, onTap: () {}),
                 MyCircleButton(icon: facebookIcon, onTap: () {}),
