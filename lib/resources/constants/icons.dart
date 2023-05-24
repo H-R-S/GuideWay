@@ -28,7 +28,19 @@ const String visaChanceIcon = "assets/icons/visa_chance_icon.png";
 const String visaIcon = "assets/icons/visa_icon.png";
 const String visaProcessIcon = "assets/icons/visa_process_time_icon.png";
 const String embassyIcon = "assets/icons/embassy_icon.png";
+const String airportIcon = "assets/icons/airport_icon.png";
+const String drivingIcon = "assets/icons/driving_icon.png";
+const String transportIcon = "assets/icons/transport_icon.png";
 
+// Weather Icons
+const String cloudyIcon = "assets/icons/cloudy_weather_icon.png";
+const String rainbowIcon = "assets/icons/rainbow_weather_icon.png";
+const String rainyIcon = "assets/icons/rainy_weather_icon.png";
+const String thunderStromIcon = "assets/icons/thunder_strom_weather_icon.png";
+const String thunderStromDayIcon = "assets/icons/thunder_strom_weather_icon_day.png";
+const String sunIcon = "assets/icons/sun_icon.png";
+
+// Bottom Bar Icons
 const String homeIcon = "assets/icons/home_icon.png";
 const String scanIcon = "assets/icons/scan_icon.png";
 const String chatIcon = "assets/icons/chat_icon.png";
