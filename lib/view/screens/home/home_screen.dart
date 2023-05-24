@@ -25,14 +25,13 @@ class HomeScreen extends StatelessWidget {
                           physics: const NeverScrollableScrollPhysics(),
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
-                                  mainAxisExtent: width * 0.4,
+                                  mainAxisExtent: width * 0.45,
                                   crossAxisSpacing: 30,
                                   mainAxisSpacing: 30,
                                   crossAxisCount: 2),
                           itemCount: data.length,
                           itemBuilder: (context, index) {
                             return InfoContainer(
-                                isDisable: data[index]["isDisable"],
                                 title: data[index]["title"],
                                 icon: data[index]["icon"],
                                 onTap: () {
