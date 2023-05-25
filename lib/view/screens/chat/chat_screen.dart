@@ -21,8 +21,6 @@ class ChatScreen extends StatelessWidget {
             padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
             child: MyTextField(
-                filledColor: Colors.white,
-                suffixIcon: Icons.send,
                 controller: chatController,
                 hint: "Ask a question")),
         body: SingleChildScrollView(
