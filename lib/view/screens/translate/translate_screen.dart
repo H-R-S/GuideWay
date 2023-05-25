@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:guide_way/view/widgets/button/my_elevated_button.dart';
 import '../../widgets/app_bar/my_app_bar.dart';
 import '../../widgets/text_field/my_text_field.dart';
 
@@ -20,11 +21,14 @@ class TranslateScreen extends StatelessWidget {
                   header: "English (US)",
                   controller: translateController,
                   hint: "Enter Text"),
-              Icon(Icons.keyboard_double_arrow_down_sharp),
+              const SizedBox(height: 20),
               MyTextField(
+                  header: "Translation",
                   minLine: 5,
                   controller: translateController,
-                  hint: "Translation")
+                  hint: "Translation"),
+              const SizedBox(height: 40),
+              MyElevatedButton(title: "Translate", onTap: () {})
             ])));
   }
 }
