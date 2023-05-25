@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../resources/constants/style.dart';
 
 // ignore: must_be_immutable
 class MyTextField extends StatefulWidget {
@@ -7,14 +8,11 @@ class MyTextField extends StatefulWidget {
   final bool isRequired;
   final String hint;
   final bool isPassword;
-  final bool isPhoneNumber;
   final int minLine;
-  final bool isCategories;
-  final Color? filledColor;
+  final double? contentPadding;
   final Function(String)? onChanged;
+  List<String>? dropDownList;
   bool isVisible;
-  final IconData? suffixIcon;
-  final Function()? onTapSuffix;
   final bool isReadable;
   final Function()? onTap;
   final String? Function(String?)? validator;
@@ -23,18 +21,15 @@ class MyTextField extends StatefulWidget {
       {super.key,
       required this.controller,
       required this.hint,
-      this.suffixIcon,
-      this.onTapSuffix,
+      this.dropDownList,
       this.onChanged,
+      this.contentPadding,
       this.minLine = 1,
       this.header,
-      this.filledColor,
-      this.isPhoneNumber = false,
       this.isRequired = false,
       this.isVisible = false,
       this.isPassword = false,
       this.isReadable = false,
-      this.isCategories = false,
       this.onTap,
       this.validator});
 
@@ -63,11 +58,12 @@ class _MyTextFieldState extends State<MyTextField> {
               readOnly: widget.isReadable,
               validator: widget.validator,
               obscureText: widget.isVisible,
-              cursorColor: Colors.grey,
+              cursorColor: primary,
               controller: widget.controller,
               decoration: InputDecoration(
-                  fillColor: widget.filledColor,
-                  filled: widget.filledColor != null,
+                  contentPadding: widget.contentPadding != null
+                      ? EdgeInsets.all(widget.contentPadding!)
+                      : null,
                   suffixIcon: widget.isPassword
                       ? IconButton(
                           onPressed: () {
@@ -79,19 +75,29 @@ class _MyTextFieldState extends State<MyTextField> {
                               widget.isVisible
                                   ? Icons.visibility_off_outlined
                                   : Icons.visibility_outlined,
-                              color: Colors.grey),
-                        )
-                      : widget.suffixIcon != null
-                          ? IconButton(
-                              onPressed: widget.onTapSuffix,
-                              icon: Icon(widget.suffixIcon))
+                              color: Colors.grey))
+                      : widget.dropDownList != null
+                          ? PopupMenuButton<String>(
+                              position: PopupMenuPosition.under,
+                              icon: const Icon(Icons.arrow_drop_down,
+                                  color: Colors.grey),
+                              onSelected: (String value) {
+                                widget.controller.text = value;
+                              },
+                              itemBuilder: (BuildContext context) {
+                                return widget.dropDownList!
+                                    .map<PopupMenuItem<String>>((String value) {
+                                  return PopupMenuItem(
+                                      value: value, child: Text(value));
+                                }).toList();
+                              })
                           : null,
                   focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(10),
                       borderSide: const BorderSide(color: Colors.grey)),
                   border: OutlineInputBorder(
                       borderSide: const BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(15)),
+                      borderRadius: BorderRadius.circular(10)),
                   hintText: widget.hint))
         ]));
   }
