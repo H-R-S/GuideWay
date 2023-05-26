@@ -12,16 +12,18 @@ class MyElevatedButton extends StatelessWidget {
     return InkWell(
         onTap: onTap,
         child: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.symmetric(vertical: 15),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15), color: primary),
-          child: Center(
+            height: 60,
+            width: double.infinity,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15), color: primary),
+            child: Center(
+                child: Padding(
+              padding: const EdgeInsets.only(top: 10),
               child: Text(title,
                   style: const TextStyle(
                       color: Colors.white,
                       fontSize: 20,
-                      fontWeight: FontWeight.bold)))
-        ));
+                      fontWeight: FontWeight.bold)),
+            ))));
   }
 }
