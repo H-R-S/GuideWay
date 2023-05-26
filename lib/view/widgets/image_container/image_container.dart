@@ -63,11 +63,14 @@ class ImageContainer extends StatelessWidget {
                                       children: [
                                         const Icon(Icons.location_on,
                                             color: Colors.grey),
-                                        const SizedBox(width: 5),
-                                        Text(city ?? "",
-                                            style: style.copyWith(
-                                                color: Colors.grey.shade700,
-                                                fontSize: 16))
+                                        const SizedBox(width: 2),
+                                        Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 8),
+                                            child: Text(city ?? "",
+                                                style: style.copyWith(
+                                                    color: Colors.grey.shade700,
+                                                    fontSize: 16)))
                                       ])
                               ])))
                 ]))));
