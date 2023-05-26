@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import '../home.dart';
+import '../view/screens/airport_rules/airport_rules_screen.dart';
 import '../view/screens/country/country_screen.dart';
 import '../view/screens/currency/currency_screen.dart';
 import '../view/screens/destinations/destinations_screen.dart';
+import '../view/screens/driving_rules/driving_rules_screen.dart';
 import '../view/screens/forgot_password/forgot_password_screen.dart';
+import '../view/screens/job_timings/job_timings_screen.dart';
 import '../view/screens/location/location_screen.dart';
 import '../view/screens/login/login_screen.dart';
 import '../view/screens/on_boarding/on_boarding_screen.dart';
@@ -11,6 +14,7 @@ import '../view/screens/prayer_timings/prayer_timings_screen.dart';
 import '../view/screens/qibla_direction/qibla_direction_screen.dart';
 import '../view/screens/signup/sign_up_screen.dart';
 import '../view/screens/translate/translate_screen.dart';
+import '../view/screens/transport_rules/transport_rules_screen.dart';
 import '../view/screens/universities/universities_screen.dart';
 import '../view/screens/weather/weather_screen.dart';
 import 'routes_name.dart';
@@ -59,6 +63,18 @@ class Routes {
 
       case RoutesName.qiblaDirection:
         return getPageRoute(QiblaDirectionScreen());
+
+      case RoutesName.transportRules:
+        return getPageRoute(TransportRulesScreen());
+
+      case RoutesName.drivingRules:
+        return getPageRoute(DrivingRulesScreen());
+
+      case RoutesName.airportRules:
+        return getPageRoute(AirportRulesScreen());
+      
+      case RoutesName.jobTimings:
+        return getPageRoute(JobTimingsScreen());
 
       default:
         return getPageRoute(LoginScreen());
