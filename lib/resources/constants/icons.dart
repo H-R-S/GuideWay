@@ -31,6 +31,8 @@ const String embassyIcon = "assets/icons/embassy_icon.png";
 const String airportIcon = "assets/icons/airport_icon.png";
 const String drivingIcon = "assets/icons/driving_icon.png";
 const String transportIcon = "assets/icons/transport_icon.png";
+const String termsAndConditionIcon = "assets/icons/terms_and_condition_icon.png";
+const String qiblaCompasIcon = "assets/icons/qibla_compas_icon.png";
 
 // Weather Icons
 const String cloudyIcon = "assets/icons/cloudy_weather_icon.png";
