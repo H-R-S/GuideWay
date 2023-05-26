@@ -31,12 +31,18 @@ AppBar MyAppBar(GlobalKey<ScaffoldState> key, BuildContext context,
       //     : null,
       title: isHome
           ? Row(mainAxisSize: MainAxisSize.min, children: [
-              Image.asset(guideWayIcon, height: 30),
-              const SizedBox(width: 10),
-              const Text("GuideWay",
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold))
+              Image.asset(guideWayIcon, height: 35),
+              const SizedBox(width: 5),
+              const Padding(
+                  padding: EdgeInsets.only(top: 15),
+                  child: Text("GuideWay",
+                      style:
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold)))
             ])
-          : Text(title ?? "",
-              style: const TextStyle(
-                  color: Colors.black, fontWeight: FontWeight.bold)));
+          : Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Text(title ?? "",
+                  style: const TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold)),
+            ));
 }
