@@ -33,22 +33,22 @@ List<Map<String, dynamic>> data = [
     "icon": translateIcon,
   },
   {
-    "route": RoutesName.destinations,
+    "route": RoutesName.jobTimings,
     "title": "Job Timings",
     "icon": jobsIcon,
   },
   {
-    "route": RoutesName.destinations,
+    "route": RoutesName.transportRules,
     "title": "Transport Rules",
     "icon": transportIcon,
   },
   {
-    "route": RoutesName.destinations,
+    "route": RoutesName.airportRules,
     "title": "Airport Rules",
     "icon": airportIcon,
   },
   {
-    "route": RoutesName.destinations,
+    "route": RoutesName.drivingRules,
     "title": "Driving Rules",
     "icon": drivingIcon,
   },
