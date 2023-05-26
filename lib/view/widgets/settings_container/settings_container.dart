@@ -31,6 +31,8 @@ class SettingsContainer extends StatefulWidget {
 }
 
 class _SettingsContainerState extends State<SettingsContainer> {
+  bool isTrue = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,7 +46,9 @@ class _SettingsContainerState extends State<SettingsContainer> {
                     children: [
                       Row(children: [
                         SizedBox(
-                            height: 30, width: 30, child: Image.asset(widget.icon)),
+                            height: 30,
+                            width: 30,
+                            child: Image.asset(widget.icon)),
                         Padding(
                             padding: const EdgeInsets.all(10)
                                 .copyWith(left: 30, top: 20),
@@ -65,21 +69,23 @@ class _SettingsContainerState extends State<SettingsContainer> {
                                   )
                                 ]))
                       ]),
-                        widget.isSwitch
-                            ? Container(
-                                height: 20,
-                                width: 20,
-                                padding: const EdgeInsets.only(right: 20),
-                                child: Switch(
-                                    activeTrackColor: primary,
-                                    value: widget.isDark,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        widget.isDark = value;
-                                      });
-                                    }))
-                            : widget.onTap != null ? const Icon(Icons.arrow_forward_ios,
-                                size: 20, color: Colors.grey) : const SizedBox()
+                      widget.isSwitch
+                          ? Container(
+                              height: 20,
+                              width: 20,
+                              padding: const EdgeInsets.only(right: 20),
+                              child: Switch(
+                                  activeTrackColor: primary,
+                                  value: isTrue,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      isTrue = value;
+                                    });
+                                  }))
+                          : widget.onTap != null
+                              ? const Icon(Icons.arrow_forward_ios,
+                                  size: 20, color: Colors.grey)
+                              : const SizedBox()
                     ]))));
   }
 }
