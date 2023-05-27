@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../resources/constants/icons.dart';
 import '../../../routes/routes_name.dart';
+import '../../../theme/theme_provider.dart';
 import '../../widgets/button/forgot_password_button.dart';
 import '../../widgets/button/my_circle_button.dart';
 import '../../widgets/button/my_elevated_button.dart';
@@ -16,6 +18,10 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
+    bool isDark = themeProvider.currentTheme == ThemeData.dark();
+
     return Scaffold(
         body: Padding(
             padding: const EdgeInsets.all(20).copyWith(top: 50),
@@ -24,8 +30,14 @@ class LoginScreen extends StatelessWidget {
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Image.asset(guideWayIcon, height: 50),
                 const SizedBox(width: 20),
-                const Text("GuideWay",
-                    style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))
+                Padding(
+                  padding: const EdgeInsets.only(top: 13),
+                  child: Text("GuideWay",
+                      style: TextStyle(
+                          color: isDark ? Colors.white : null,
+                          fontSize: 35,
+                          fontWeight: FontWeight.bold)),
+                )
               ]),
               const SizedBox(height: 40),
               const MainTag(
@@ -47,7 +59,8 @@ class LoginScreen extends StatelessWidget {
                   }),
               const SignUpButton(),
               const SizedBox(height: 20),
-              const Text("or continue with"),
+              Text("or continue with",
+                  style: TextStyle(color: isDark ? Colors.white : null)),
               const SizedBox(height: 20),
               Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
                 MyCircleButton(icon: googleIcon, onTap: () {}),
