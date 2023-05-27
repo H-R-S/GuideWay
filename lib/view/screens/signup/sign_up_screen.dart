@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:guide_way/routes/routes_name.dart';
+import 'package:provider/provider.dart';
 import '../../../resources/constants/icons.dart';
+import '../../../routes/routes_name.dart';
+import '../../../theme/theme_provider.dart';
 import '../../widgets/button/my_circle_button.dart';
 import '../../widgets/button/my_elevated_button.dart';
 import '../../widgets/button/sign_in_button.dart';
@@ -16,6 +18,10 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
+    bool isDark = themeProvider.currentTheme == ThemeData.dark();
+
     return SafeArea(
         child: Scaffold(
             extendBodyBehindAppBar: true,
@@ -54,7 +60,9 @@ class SignUpScreen extends StatelessWidget {
                               }),
                           const SignInButton(),
                           const SizedBox(height: 20),
-                          const Text("or continue with"),
+                          Text("or continue with",
+                              style: TextStyle(
+                                  color: isDark ? Colors.white : null)),
                           const SizedBox(height: 20),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

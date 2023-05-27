@@ -26,7 +26,7 @@ class WeatherScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   Container(
                       height: 160,
-                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      padding: const EdgeInsets.symmetric(vertical: 10),
                       decoration: const BoxDecoration(
                           border: Border.symmetric(
                               horizontal: BorderSide(color: Colors.grey))),
