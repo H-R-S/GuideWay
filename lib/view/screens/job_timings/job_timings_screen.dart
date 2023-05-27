@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../resources/data/job_timings.dart';
+import '../../../theme/theme_provider.dart';
 import '../../widgets/app_bar/my_app_bar.dart';
 
 class JobTimingsScreen extends StatelessWidget {
@@ -9,8 +11,15 @@ class JobTimingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const style = TextStyle(fontSize: 18, fontWeight: FontWeight.normal);
+    final themeProvider = Provider.of<ThemeProvider>(context);
 
+    bool isDark = themeProvider.currentTheme == ThemeData.dark();
+
+    final style = TextStyle(
+        color: isDark ? Colors.white : null,
+        fontSize: 18,
+        fontWeight: FontWeight.normal);
+        
     return Scaffold(
         appBar: MyAppBar(scaffoldKey, context, title: "Job Timings"),
         body: SingleChildScrollView(
