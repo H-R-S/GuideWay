@@ -26,7 +26,7 @@ class _LocationScreenState extends State<LocationScreen> {
     return Scaffold(
         appBar: MyAppBar(scaffoldKey, context, title: "Location"),
         body: GoogleMap(
-            mapType: MapType.hybrid,
+            mapType: MapType.normal,
             initialCameraPosition: _kGooglePlex,
             onMapCreated: (GoogleMapController controller) {
               _controller.complete(controller);
