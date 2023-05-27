@@ -18,6 +18,18 @@ class RoutesName {
 
   static const String weather = "weather_screen";
 
+  static const String profile = "profile_screen";
+
+  static const String feedback = "feedback_screen";
+
+  static const String notifications = "notifications_screen";
+
+  static const String changePassword = "change_password_screen";
+
+  static const String privacyPolicy = "privacy_policy_screen";
+
+  static const String termsAndCondition = "terms_and_condition_screen";
+
   static const String airportRules = "airport_rules_screen";
 
   static const String drivingRules = "driving_rules_screen";
