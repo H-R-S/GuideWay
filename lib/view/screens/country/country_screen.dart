@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../resources/data/countries.dart';
 import '../../../routes/routes_name.dart';
+import '../../../theme/theme_provider.dart';
 import '../../widgets/button/my_elevated_button.dart';
 import '../../widgets/country_container/country_container.dart';
 import '../../widgets/search_bar/my_search_bar.dart';
@@ -26,6 +28,10 @@ class _CountryScreenState extends State<CountryScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
+    bool isDark = themeProvider.currentTheme == ThemeData.dark();
+
     return Scaffold(
         body: Padding(
             padding: const EdgeInsets.all(20).copyWith(top: 40),
@@ -33,9 +39,11 @@ class _CountryScreenState extends State<CountryScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Find Your Destination",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  Text("Find Your Destination",
+                      style: TextStyle(
+                          color: isDark ? Colors.white : null,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold)),
                   const Text(
                       "Browse the list of countries below and select where you want to travel abroad with GuideWay.",
                       style: TextStyle(
