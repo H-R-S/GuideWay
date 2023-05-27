@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:guide_way/resources/constants/icons.dart';
 import 'package:provider/provider.dart';
+import '../../../resources/constants/icons.dart';
 import '../../../theme/theme_provider.dart';
 import '../../widgets/app_bar/my_app_bar.dart';
 
