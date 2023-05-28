@@ -59,11 +59,11 @@ class SignUpScreen extends StatelessWidget {
                                     context, RoutesName.country);
                               }),
                           const SignInButton(),
-                          const SizedBox(height: 20),
+                          const SizedBox(height: 10),
                           Text("or continue with",
                               style: TextStyle(
                                   color: isDark ? Colors.white : null)),
-                          const SizedBox(height: 20),
+                          const SizedBox(height: 10),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
