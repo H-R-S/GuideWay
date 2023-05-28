@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:guide_way/resources/constants/style.dart';
+import 'package:provider/provider.dart';
+
+import '../../../theme/theme_provider.dart';
 
 class ImageContainer extends StatelessWidget {
   final String? name, description, image, city;
@@ -14,7 +18,14 @@ class ImageContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const style = TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
+    bool isDark = themeProvider.currentTheme == ThemeData.dark();
+
+    final style = TextStyle(
+        color: isDark ? Colors.white : null,
+        fontSize: 20,
+        fontWeight: FontWeight.bold);
 
     return Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
@@ -22,13 +33,13 @@ class ImageContainer extends StatelessWidget {
             onTap: onTap,
             child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: const [
+                    color: isDark ? dark : Colors.white,
+                    boxShadow: [
                       BoxShadow(
-                          color: Colors.grey,
+                          color: isDark ? Colors.black12 : Colors.grey,
                           spreadRadius: 1,
                           blurRadius: 5,
-                          offset: Offset(0, 4))
+                          offset: const Offset(0, 4))
                     ],
                     borderRadius: BorderRadius.circular(20)),
                 child: Row(children: [
@@ -61,15 +72,19 @@ class ImageContainer extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
-                                        const Icon(Icons.location_on,
-                                            color: Colors.grey),
+                                        Icon(Icons.location_on,
+                                            color: isDark
+                                                ? Colors.white70
+                                                : Colors.grey),
                                         const SizedBox(width: 2),
                                         Padding(
                                             padding:
                                                 const EdgeInsets.only(top: 8),
                                             child: Text(city ?? "",
                                                 style: style.copyWith(
-                                                    color: Colors.grey.shade700,
+                                                    color: isDark
+                                                        ? Colors.white70
+                                                        : Colors.grey.shade700,
                                                     fontSize: 16)))
                                       ])
                               ])))
