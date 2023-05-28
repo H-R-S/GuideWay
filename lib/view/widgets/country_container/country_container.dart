@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../resources/constants/style.dart';
+import '../../../theme/theme_provider.dart';
 
 class CountryContainer extends StatelessWidget {
   final String flag;
@@ -16,11 +18,15 @@ class CountryContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
+    bool isDark = themeProvider.currentTheme == ThemeData.dark();
+
     return InkWell(
         onTap: onTap,
         child: Container(
             margin: const EdgeInsets.symmetric(vertical: 5),
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             decoration: BoxDecoration(
                 color: isChecked ? primary : null,
                 borderRadius: BorderRadius.circular(15),
@@ -32,11 +38,14 @@ class CountryContainer extends StatelessWidget {
                   Row(children: [
                     CircleAvatar(radius: 15, backgroundImage: AssetImage(flag)),
                     const SizedBox(width: 20),
-                    Text(title,
-                        style: TextStyle(
-                            color: isChecked ? Colors.white : null,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold))
+                    Padding(
+                        padding: const EdgeInsets.only(top: 12),
+                        child: Text(title,
+                            style: TextStyle(
+                                color:
+                                    isDark || isChecked ? Colors.white : null,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold)))
                   ]),
                   if (isChecked)
                     const Icon(Icons.check_circle,
