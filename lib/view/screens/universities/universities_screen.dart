@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:guide_way/resources/data/universities.dart';
+import 'package:guide_way/routes/routes.dart';
+import 'package:guide_way/view/screens/detail/detail_screen.dart';
 import '../../widgets/app_bar/my_app_bar.dart';
 import '../../widgets/image_container/image_container.dart';
 
@@ -25,7 +27,13 @@ class UniversitiesScreen extends StatelessWidget {
                             name: universities[index]["name"],
                             city: universities[index]["city"],
                             image: universities[index]["image"],
-                            onTap: () {});
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  getPageRoute(DetailScreen(
+                                      isWebsite: true,
+                                      title: universities[index]["name"])));
+                            });
                       })
                 ]))));
   }
