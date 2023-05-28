@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:guide_way/resources/constants/icons.dart';
+import 'package:provider/provider.dart';
 import '../../../resources/constants/style.dart';
+import '../../../theme/theme_provider.dart';
 
 AppBar MyAppBar(GlobalKey<ScaffoldState> key, BuildContext context,
     {bool isHome = false,
@@ -13,13 +15,17 @@ AppBar MyAppBar(GlobalKey<ScaffoldState> key, BuildContext context,
     Widget? bottom,
     String? title,
     bool centerTitle = true}) {
+  final themeProvider = Provider.of<ThemeProvider>(context);
+
+  bool isDark = themeProvider.currentTheme == ThemeData.dark();
+
   return AppBar(
       elevation: 0,
-      backgroundColor: primaryLight,
+      backgroundColor: isDark ? dark : primaryLight,
       centerTitle: isHome ? false : centerTitle,
       leading: isBack
           ? BackButton(
-              color: Colors.grey,
+              color: isDark ? Colors.white : Colors.grey,
               onPressed: onTapBackButton ??
                   () {
                     Navigator.pop(context);
@@ -33,16 +39,19 @@ AppBar MyAppBar(GlobalKey<ScaffoldState> key, BuildContext context,
           ? Row(mainAxisSize: MainAxisSize.min, children: [
               Image.asset(guideWayIcon, height: 35),
               const SizedBox(width: 5),
-              const Padding(
-                  padding: EdgeInsets.only(top: 15),
+              Padding(
+                  padding: const EdgeInsets.only(top: 15),
                   child: Text("GuideWay",
-                      style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold)))
+                      style: TextStyle(
+                          color: isDark ? Colors.white : null,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold)))
             ])
           : Padding(
               padding: const EdgeInsets.only(top: 8),
               child: Text(title ?? "",
-                  style: const TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.bold)),
+                  style: TextStyle(
+                      color: isDark ? Colors.white : Colors.black,
+                      fontWeight: FontWeight.bold)),
             ));
 }
