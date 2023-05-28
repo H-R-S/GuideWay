@@ -13,14 +13,10 @@ class ForgotPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(leading: BackButton(onPressed: () {
-          Navigator.pop(context);
-        })),
+        appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0),
         body: Padding(
             padding: const EdgeInsets.all(20).copyWith(top: 50),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
+            child: Column(mainAxisSize: MainAxisSize.min, children: [
               const MainTag(
                   title: "Forgot Password",
                   subTitle: "Enter your email account to reset your password"),
@@ -30,9 +26,10 @@ class ForgotPasswordScreen extends StatelessWidget {
               MyElevatedButton(
                   title: "Reset Password",
                   onTap: () {
-                    AnimatedDialog(context: context, 
-                    endOffSet: const Offset(0,0),
-                    child: const ForgotDialog());
+                    AnimatedDialog(
+                        context: context,
+                        endOffSet: const Offset(0, 0),
+                        child: const ForgotDialog());
                   })
             ])));
   }
