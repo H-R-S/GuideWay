@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:guide_way/resources/data/destinations.dart';
+import 'package:guide_way/routes/routes.dart';
+import 'package:guide_way/view/screens/detail/detail_screen.dart';
 import 'package:guide_way/view/widgets/image_container/image_container.dart';
 import '../../widgets/app_bar/my_app_bar.dart';
 
@@ -25,7 +27,12 @@ class DestinationsScreen extends StatelessWidget {
                             name: destinations[index]["name"],
                             description: destinations[index]["description"],
                             image: destinations[index]["image"],
-                            onTap: () {});
+                            onTap: () {
+                              Navigator.push(context, getPageRoute(DetailScreen(
+                                title: destinations[index]["name"],
+                                description: destinations[index]["description"]
+                              )));
+                            });
                       })
                 ]))));
   }
