@@ -31,15 +31,14 @@ class LoginScreen extends StatelessWidget {
                 Image.asset(guideWayIcon, height: 50),
                 const SizedBox(width: 20),
                 Padding(
-                  padding: const EdgeInsets.only(top: 13),
-                  child: Text("GuideWay",
-                      style: TextStyle(
-                          color: isDark ? Colors.white : null,
-                          fontSize: 35,
-                          fontWeight: FontWeight.bold)),
-                )
+                    padding: const EdgeInsets.only(top: 13),
+                    child: Text("GuideWay",
+                        style: TextStyle(
+                            color: isDark ? Colors.white : null,
+                            fontSize: 35,
+                            fontWeight: FontWeight.bold)))
               ]),
-              const SizedBox(height: 40),
+              const SizedBox(height: 20),
               const MainTag(
                   title: "Sign in now",
                   subTitle: "Please sign in to continue our app"),
@@ -58,10 +57,10 @@ class LoginScreen extends StatelessWidget {
                     Navigator.pushReplacementNamed(context, RoutesName.country);
                   }),
               const SignUpButton(),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               Text("or continue with",
                   style: TextStyle(color: isDark ? Colors.white : null)),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
                 MyCircleButton(icon: googleIcon, onTap: () {}),
                 MyCircleButton(icon: facebookIcon, onTap: () {}),
