@@ -11,7 +11,7 @@ class TermsAndConditionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: MyAppBar(scaffoldKey, context, title: "Terms & Condition"),
+        appBar: MyAppBar(scaffoldKey, context, title: "Terms & Conditions"),
         body: SfPdfViewer.asset(termsAndCondition));
   }
 }
