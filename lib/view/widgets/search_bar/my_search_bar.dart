@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../resources/constants/icons.dart';
 import '../../../resources/constants/style.dart';
+import '../../../theme/theme_provider.dart';
 
 class MySearchBar extends StatelessWidget {
   final String? Function(String?)? validator;
@@ -27,15 +29,19 @@ class MySearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
+    bool isDark = themeProvider.currentTheme == ThemeData.dark();
+
     return TextFormField(
+        textAlignVertical: TextAlignVertical.bottom,
+        style: TextStyle(color: isDark ? Colors.white : null),
         validator: validator,
         readOnly: isReadOnly,
         onTap: onTap,
         onChanged: onChanged,
         controller: controller,
         decoration: InputDecoration(
-            filled: true,
-            fillColor: Colors.white,
             prefixIcon: Padding(
                 padding: const EdgeInsets.only(left: 20, right: 10),
                 child: Padding(
