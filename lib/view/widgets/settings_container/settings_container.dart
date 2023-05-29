@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:guide_way/theme/theme_provider.dart';
+import 'package:provider/provider.dart';
 import '../../../resources/constants/style.dart';
 
 // ignore: must_be_immutable
@@ -31,10 +32,12 @@ class SettingsContainer extends StatefulWidget {
 }
 
 class _SettingsContainerState extends State<SettingsContainer> {
-  bool isTrue = false;
-
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
+    bool isDark = themeProvider.currentTheme == ThemeData.dark();
+
     return Container(
         margin: const EdgeInsets.symmetric(vertical: 5),
         child: InkWell(
@@ -56,17 +59,22 @@ class _SettingsContainerState extends State<SettingsContainer> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(widget.title ?? "",
-                                      style: const TextStyle(
+                                      style: TextStyle(
+                                          color: isDark
+                                              ? Colors.white
+                                              : null,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 18)),
                                   SizedBox(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.65,
-                                    child: Text(widget.subTitle ?? "",
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: const TextStyle(fontSize: 16)),
-                                  )
+                                      width: MediaQuery.of(context).size.width *
+                                          0.65,
+                                      child: Text(widget.subTitle ?? "",
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              color:
+                                                  isDark ? Colors.grey : null,
+                                              fontSize: 16)))
                                 ]))
                       ]),
                       widget.isSwitch
@@ -75,11 +83,12 @@ class _SettingsContainerState extends State<SettingsContainer> {
                               width: 20,
                               padding: const EdgeInsets.only(right: 20),
                               child: Switch(
+                                  inactiveTrackColor: Colors.grey,
                                   activeTrackColor: primary,
-                                  value: isTrue,
+                                  value: isDark,
                                   onChanged: (value) {
                                     setState(() {
-                                      isTrue = value;
+                                      isDark = value;
                                     });
                                   }))
                           : widget.onTap != null
