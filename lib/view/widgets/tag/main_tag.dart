@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../theme/theme_provider.dart';
 
 class MainTag extends StatelessWidget {
   final String title, subTitle;
@@ -7,11 +9,17 @@ class MainTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
+    bool isDark = themeProvider.currentTheme == ThemeData.dark();
+
     return Column(children: [
       FittedBox(
           child: Text(title,
-              style:
-                  const TextStyle(fontSize: 25, fontWeight: FontWeight.bold))),
+              style: TextStyle(
+                  color: isDark ? Colors.white : null,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold))),
       Text(subTitle,
           textAlign: TextAlign.center,
           style: const TextStyle(
