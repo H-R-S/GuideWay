@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../../theme/theme_provider.dart';
 
 class OnBoardContainer extends StatelessWidget {
   final String? title, subTitle, image;
@@ -7,7 +9,14 @@ class OnBoardContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const style = TextStyle(fontSize: 18, fontWeight: FontWeight.w500);
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
+    bool isDark = themeProvider.currentTheme == ThemeData.dark();
+
+    final style = TextStyle(
+        color: isDark ? Colors.white : null,
+        fontSize: 18,
+        fontWeight: FontWeight.w500);
 
     return Column(children: [
       Container(
@@ -39,7 +48,8 @@ class OnBoardContainer extends StatelessWidget {
             if (subTitle != null)
               Text(subTitle!,
                   textAlign: TextAlign.center,
-                  style: style.copyWith(color: Colors.grey.shade700))
+                  style: style.copyWith(
+                      color: isDark ? Colors.white70 : Colors.grey.shade700))
           ])),
       const Spacer()
     ]);
