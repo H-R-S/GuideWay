@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:guide_way/view/screens/chat/chat_screen.dart';
+import 'package:guide_way/theme/theme_provider.dart';
+import 'package:guide_way/view/screens/faq/faq_screen.dart';
 import 'package:guide_way/view/screens/scanner/scanner_screen.dart';
 import 'package:guide_way/view/screens/visa_process/visa_process_screen.dart';
+import 'package:provider/provider.dart';
 import 'resources/constants/icons.dart';
 import 'resources/constants/style.dart';
 import 'view/screens/home/home_screen.dart';
@@ -24,6 +26,10 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
+    bool isDark = themeProvider.currentTheme == ThemeData.dark();
+
     List<Widget> screens = [
       HomeScreen(),
       VisaProcessScreen(),
@@ -36,10 +42,8 @@ class _HomeState extends State<Home> {
         body: screens[currentIndex],
         bottomNavigationBar: BottomNavigationBar(
             elevation: 0,
-            backgroundColor: primary.withOpacity(0.1),
+            backgroundColor: isDark ? dark : primaryLight,
             currentIndex: currentIndex,
-            selectedItemColor: primary,
-            unselectedItemColor: primary.withOpacity(.4),
             showSelectedLabels: false,
             showUnselectedLabels: false,
             type: BottomNavigationBarType.fixed,
@@ -53,19 +57,21 @@ class _HomeState extends State<Home> {
                   icon: Image.asset(homeIcon, height: 40), label: ""),
               BottomNavigationBarItem(
                   icon: Image.asset(taskIcon, height: 40), label: ""),
-               BottomNavigationBarItem(icon: Container(
-                   padding: const EdgeInsets.all(10),
-                   decoration: BoxDecoration(
-                       boxShadow: const [
-                         BoxShadow(
-                             color: Colors.grey,
-                             spreadRadius: 1,
-                             blurRadius: 5,
-                             offset: Offset(0, 4))
-                       ],
-                       color: primaryLight,
-                       borderRadius: BorderRadius.circular(20)),
-                   child: Image.asset(scanIcon, height: 40)), label: "Scan"),
+              BottomNavigationBarItem(
+                  icon: Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                                color: isDark ? dark : Colors.grey,
+                                spreadRadius: 1,
+                                blurRadius: 5,
+                                offset: const Offset(0, 4))
+                          ],
+                          color: isDark ? Colors.black12 : primaryLight,
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Image.asset(scanIcon, height: 30)),
+                  label: ""),
               BottomNavigationBarItem(
                   icon: Image.asset(chatIcon, height: 40), label: ""),
               BottomNavigationBarItem(
