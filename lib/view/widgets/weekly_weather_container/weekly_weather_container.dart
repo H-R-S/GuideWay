@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../theme/theme_provider.dart';
 
 class WeeklyWeatherContainer extends StatelessWidget {
   final String day, icon, dayTemperature, nightTemperature;
@@ -12,8 +15,16 @@ class WeeklyWeatherContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
+    bool isDark = themeProvider.currentTheme == ThemeData.dark();
+
     double width = MediaQuery.of(context).size.width;
-    const style = TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
+
+    final style = TextStyle(
+        color: isDark ? Colors.white : null,
+        fontSize: 18,
+        fontWeight: FontWeight.bold);
 
     return Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
