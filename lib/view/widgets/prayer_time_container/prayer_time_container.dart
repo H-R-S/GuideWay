@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../theme/theme_provider.dart';
 
 class PrayerTimeContainer extends StatelessWidget {
   final String? name, azanTime, iqamaTime;
@@ -13,9 +15,17 @@ class PrayerTimeContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
+    bool isDark = themeProvider.currentTheme == ThemeData.dark();
+
     double width = MediaQuery.of(context).size.width;
     final style = TextStyle(
-        color: isHeader ? Colors.grey : null,
+        color: isDark && isHeader
+            ? Colors.white
+            : isHeader
+                ? Colors.grey
+                : null,
         fontSize: 18,
         fontWeight: FontWeight.bold);
 
@@ -31,15 +41,22 @@ class PrayerTimeContainer extends StatelessWidget {
               ])
             : Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 SizedBox(
-                    width: width * 0.3, child: Text(name ?? "", style: style)),
+                    width: width * 0.3,
+                    child: Text(name ?? "",
+                        style: style.copyWith(
+                            color: isDark ? Colors.grey : null))),
                 SizedBox(
                     width: width * 0.3,
                     child: Text(azanTime ?? "",
-                        style: style.copyWith(fontWeight: FontWeight.normal))),
+                        style: style.copyWith(
+                            color: isDark ? Colors.grey : null,
+                            fontWeight: FontWeight.normal))),
                 SizedBox(
                     width: width * 0.3,
                     child: Text(iqamaTime ?? "",
-                        style: style.copyWith(fontWeight: FontWeight.normal)))
+                        style: style.copyWith(
+                            color: isDark ? Colors.grey : null,
+                            fontWeight: FontWeight.normal)))
               ]));
   }
 }
