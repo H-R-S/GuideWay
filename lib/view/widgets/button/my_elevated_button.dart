@@ -12,7 +12,7 @@ class MyElevatedButton extends StatelessWidget {
     return InkWell(
         onTap: onTap,
         child: Container(
-            height: 60,
+            height: 55,
             width: double.infinity,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15), color: primary),
