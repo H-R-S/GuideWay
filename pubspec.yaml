@@ -50,6 +50,13 @@ dependencies:
   # Google Map
   google_maps_flutter: ^2.2.8
 
+  # State Management
+  provider: ^6.0.5
+
+  # PDF Viewer
+  syncfusion_flutter_pdfviewer: ^21.2.6
+  carousel_slider: ^4.2.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -87,6 +94,7 @@ flutter:
   - assets/flags/
   - assets/icons/
   - assets/images/
+  - assets/documents/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
