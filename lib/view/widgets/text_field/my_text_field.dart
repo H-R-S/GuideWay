@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../resources/constants/style.dart';
+import '../../../theme/theme_provider.dart';
 
 // ignore: must_be_immutable
 class MyTextField extends StatefulWidget {
@@ -40,12 +42,18 @@ class MyTextField extends StatefulWidget {
 class _MyTextFieldState extends State<MyTextField> {
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
+    bool isDark = themeProvider.currentTheme == ThemeData.dark();
+
     return Padding(
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: Column(children: [
           if (widget.header != null)
             Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-              Text(widget.header!, style: const TextStyle(fontSize: 16)),
+              Text(widget.header!,
+                  style: TextStyle(
+                      color: isDark ? Colors.white : null, fontSize: 16)),
               const SizedBox(width: 3),
               if (widget.isRequired)
                 const Text("*",
@@ -53,6 +61,8 @@ class _MyTextFieldState extends State<MyTextField> {
             ]),
           const SizedBox(height: 5),
           TextFormField(
+              textAlignVertical: TextAlignVertical.bottom,
+              style: TextStyle(color: isDark ? Colors.white : null),
               onChanged: widget.onChanged,
               maxLines: widget.minLine,
               readOnly: widget.isReadable,
@@ -92,6 +102,12 @@ class _MyTextFieldState extends State<MyTextField> {
                                 }).toList();
                               })
                           : null,
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(color: Colors.grey)),
+                  disabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(color: Colors.grey)),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: const BorderSide(color: Colors.grey)),
