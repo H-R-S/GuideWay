@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GuideWay</string>
+    <string name="facebook_app_id">1595304650992181</string>
+    <string name="fb_login_protocol_scheme">71116ba18255ffecdd6d1ac075856953</string>
+    <string name="facebook_client_token">bf42aa931dba091c8ceb6be0abc1f76c</string>
+</resources>
