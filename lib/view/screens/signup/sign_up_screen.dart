@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../resources/constants/icons.dart';
-import '../../../routes/routes_name.dart';
+import '../../../resources/validator/validator.dart';
 import '../../../theme/theme_provider.dart';
+import '../../../view_models/auth/auth_view_model.dart';
 import '../../widgets/button/my_circle_button.dart';
 import '../../widgets/button/my_elevated_button.dart';
 import '../../widgets/button/sign_in_button.dart';
@@ -16,22 +17,25 @@ class SignUpScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+    final authViewModel = Provider.of<AuthViewModel>(context);
 
     bool isDark = themeProvider.currentTheme == ThemeData.dark();
 
-    return SafeArea(
-        child: Scaffold(
-            extendBodyBehindAppBar: true,
-            appBar: AppBar(
-                elevation: 0,
-                backgroundColor: Colors.transparent,
-                leading: BackButton(onPressed: () {
-                  Navigator.pop(context);
-                })),
-            body: SingleChildScrollView(
+    return Scaffold(
+        appBar: AppBar(
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            leading: BackButton(onPressed: () {
+              Navigator.pop(context);
+            })),
+        body: Form(
+            key: formKey,
+            child: SingleChildScrollView(
                 child: Padding(
                     padding: const EdgeInsets.all(20).copyWith(top: 50),
                     child: Column(
@@ -43,20 +47,37 @@ class SignUpScreen extends StatelessWidget {
                                   "Please fill the details and create account"),
                           const SizedBox(height: 20),
                           MyTextField(
-                              controller: usernameController, hint: "Username"),
+                              validator: (value) =>
+                                  Validator.validateForm(value, "username"),
+                              controller: usernameController,
+                              hint: "Username"),
                           MyTextField(
-                              controller: emailController, hint: "Email"),
+                              validator: (value) =>
+                                  Validator.validateEmail(value),
+                              controller: emailController,
+                              hint: "Email"),
                           MyTextField(
+                              validator: (value) =>
+                                  Validator.validatePassword(value),
                               isPassword: true,
                               isVisible: true,
                               controller: passwordController,
                               hint: "Password"),
                           const SizedBox(height: 20),
                           MyElevatedButton(
+                              isLoading: authViewModel.loading,
                               title: "Sign Up",
                               onTap: () {
-                                Navigator.pushReplacementNamed(
-                                    context, RoutesName.country);
+                                final isValidate =
+                                    formKey.currentState!.validate();
+
+                                if (isValidate) {
+                                  authViewModel.signUpWithEmail(
+                                      context: context,
+                                      username: usernameController.text.trim(),
+                                      email: emailController.text.trim(),
+                                      password: passwordController.text.trim());
+                                }
                               }),
                           const SignInButton(),
                           const SizedBox(height: 10),
