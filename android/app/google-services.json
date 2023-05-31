@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "417960465048",
+    "project_id": "guide-wayy",
+    "storage_bucket": "guide-wayy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:417960465048:android:4ae20f142d3ea68249f6ed",
+        "android_client_info": {
+          "package_name": "com.shaheendev.guideway"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "417960465048-ukr0b4caj9hk8plfiapc40n2c25i32vm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shaheendev.guideway",
+            "certificate_hash": "51fe31104500462bd61ebc69fdfb04319529def3"
+          }
+        },
+        {
+          "client_id": "417960465048-q5of1l4j15r5am87jf189o4qit6kup4v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwSGErORbDCkhWaNahHOJivGsh7usQsBo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "417960465048-0liravrh6oprell77995o49rn9q62oqf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
