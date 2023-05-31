@@ -3,9 +3,14 @@ import '../../../resources/constants/style.dart';
 
 class MyElevatedButton extends StatelessWidget {
   final String title;
+  final bool isLoading;
   final Function() onTap;
 
-  const MyElevatedButton({super.key, required this.title, required this.onTap});
+  const MyElevatedButton(
+      {super.key,
+      this.isLoading = false,
+      required this.title,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +22,15 @@ class MyElevatedButton extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15), color: primary),
             child: Center(
-                child: Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Text(title,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold)),
-            ))));
+                child: isLoading
+                    ? const CircularProgressIndicator(color: Colors.white)
+                    : Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Text(title,
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold)),
+                      ))));
   }
 }
