@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:guide_way/resources/constants/images.dart';
 import 'package:provider/provider.dart';
 import '../../../resources/data/countries.dart';
 import '../../../routes/routes_name.dart';
 import '../../../theme/theme_provider.dart';
+import '../../../view_models/user/user_view_model.dart';
 import '../../widgets/button/my_elevated_button.dart';
 import '../../widgets/country_container/country_container.dart';
 import '../../widgets/search_bar/my_search_bar.dart';
@@ -16,6 +18,7 @@ class CountryScreen extends StatefulWidget {
 
 class _CountryScreenState extends State<CountryScreen> {
   TextEditingController searchController = TextEditingController();
+  TextEditingController countryIdController = TextEditingController();
 
   bool isChecked = false;
   int seletedIndex = 0;
@@ -29,6 +32,7 @@ class _CountryScreenState extends State<CountryScreen> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+    final userViewModel = Provider.of<UserViewModel>(context);
 
     bool isDark = themeProvider.currentTheme == ThemeData.dark();
 
@@ -54,7 +58,9 @@ class _CountryScreenState extends State<CountryScreen> {
                   MySearchBar(
                       hint: "Search your desire country",
                       controller: searchController,
-                      onChanged: (value) {}),
+                      onChanged: (value) {
+                        debugPrint(searchController.text);
+                      }),
                   const SizedBox(height: 10),
                   SizedBox(
                       height: 350,
@@ -69,17 +75,25 @@ class _CountryScreenState extends State<CountryScreen> {
                                       onSeleted(index);
                                       searchController.value =
                                           searchController.value.copyWith(
-                                              text: countries[index]["name"]);
+                                              text: countries[index].name);
+                                      countryIdController.value =
+                                          countryIdController.value.copyWith(
+                                              text: countries[index]
+                                                  .id
+                                                  .toString());
                                     },
-                                    flag: countries[index]["flag"],
-                                    title: countries[index]["name"],
+                                    flag: countries[index].flag ?? emptyImage,
+                                    title: countries[index].name ?? "",
                                     isChecked:
                                         seletedIndex == index ? true : false);
                               }))),
                   const SizedBox(height: 40),
                   MyElevatedButton(
+                      isLoading: userViewModel.loading,
                       title: "Confirm",
                       onTap: () {
+                        userViewModel.updateUserCountry(
+                            int.parse(countryIdController.text));
                         Navigator.pushReplacementNamed(
                             context, RoutesName.home);
                       })
