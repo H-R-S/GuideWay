@@ -4,6 +4,7 @@ import '../../../resources/constants/flags.dart';
 import '../../../resources/constants/icons.dart';
 import '../../../routes/routes_name.dart';
 import '../../../theme/theme_provider.dart';
+import '../../../view_models/auth/auth_view_model.dart';
 import '../../widgets/app_bar/my_app_bar.dart';
 import '../../widgets/profile_container/profile_container.dart';
 import '../../widgets/settings_container/settings_container.dart';
@@ -15,6 +16,8 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authViewModel = Provider.of<AuthViewModel>(context);
+
     return Scaffold(
         appBar: MyAppBar(scaffoldKey, context, title: "Settings"),
         body: SingleChildScrollView(
@@ -38,7 +41,7 @@ class SettingsScreen extends StatelessWidget {
               title: "Logout",
               subTitle: "Logout from the App",
               onTap: () {
-                Navigator.pushReplacementNamed(context, RoutesName.login);
+                authViewModel.signOut(context);
               }),
           SettingsContainer(
               icon: germanyFlag,
