@@ -18,6 +18,7 @@ import '../view/screens/privacy_policy/privacy_policy_screen.dart';
 import '../view/screens/profile/profile_screen.dart';
 import '../view/screens/qibla_direction/qibla_direction_screen.dart';
 import '../view/screens/signup/sign_up_screen.dart';
+import '../view/screens/splash/splash_screen.dart';
 import '../view/screens/terms_and_condition/terms_and_condition_screen.dart';
 import '../view/screens/translate/translate_screen.dart';
 import '../view/screens/transport_rules/transport_rules_screen.dart';
@@ -30,6 +31,9 @@ class Routes {
     switch (settings.name) {
       case RoutesName.onBoarding:
         return getPageRoute(OnBoardingScreen());
+
+      case RoutesName.splash:
+        return getPageRoute(const SplashScreen());
 
       case RoutesName.login:
         return getPageRoute(LoginScreen());
