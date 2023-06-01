@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../resources/constants/flags.dart';
+import '../../../models/country/country_model.dart';
+import '../../../models/user/user_model.dart';
 import '../../../resources/constants/icons.dart';
+import '../../../resources/constants/images.dart';
+import '../../../resources/data/countries.dart';
 import '../../../routes/routes_name.dart';
 import '../../../theme/theme_provider.dart';
 import '../../../view_models/auth/auth_view_model.dart';
+import '../../../view_models/user/user_view_model.dart';
 import '../../widgets/app_bar/my_app_bar.dart';
 import '../../widgets/profile_container/profile_container.dart';
 import '../../widgets/settings_container/settings_container.dart';
@@ -22,34 +26,56 @@ class SettingsScreen extends StatelessWidget {
         appBar: MyAppBar(scaffoldKey, context, title: "Settings"),
         body: SingleChildScrollView(
             child: Column(children: [
-          ProfileContainer(
-              name: "Anus Ali Siddiqui",
-              userName: "Anus",
-              email: "anusali@gmail.com",
-              onTap: () {
-                Navigator.pushNamed(context, RoutesName.profile);
-              }),
-          SettingsContainer(
-              icon: passwordIcon,
-              title: "Change Password",
-              subTitle: "Update your password",
-              onTap: () {
-                Navigator.pushNamed(context, RoutesName.changePassword);
-              }),
-          SettingsContainer(
-              icon: logoutIcon,
-              title: "Logout",
-              subTitle: "Logout from the App",
-              onTap: () {
-                authViewModel.signOut(context);
-              }),
-          SettingsContainer(
-              icon: germanyFlag,
-              title: "Country",
-              subTitle: "Change your desire country",
-              onTap: () {
-                Navigator.pushReplacementNamed(context, RoutesName.country);
-              }),
+          Consumer<UserViewModel>(builder: (context, value, child) {
+            return FutureBuilder<UserModel?>(
+                future: value.getUser(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    debugPrint(snapshot.error.toString());
+                    return Container();
+                  }
+                  if (snapshot.hasData) {
+                    final user = snapshot.data!;
+
+                    CountryModel? userCountry = countries
+                        .firstWhere((country) => country.id == user.countryId);
+
+                    return Column(children: [
+                      ProfileContainer(
+                          name: user.fullName ?? "",
+                          userName: user.username ?? "",
+                          email: user.email ?? "",
+                          onTap: () {
+                            Navigator.pushNamed(context, RoutesName.profile);
+                          }),
+                      SettingsContainer(
+                          icon: passwordIcon,
+                          title: "Change Password",
+                          subTitle: "Update your password",
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, RoutesName.changePassword);
+                          }),
+                      SettingsContainer(
+                          icon: logoutIcon,
+                          title: "Logout",
+                          subTitle: "Logout from the App",
+                          onTap: () {
+                            authViewModel.signOut(context);
+                          }),
+                      SettingsContainer(
+                          icon: userCountry.flag ?? emptyImage,
+                          title: "Country",
+                          subTitle: "Change your desire country",
+                          onTap: () {
+                            Navigator.pushReplacementNamed(
+                                context, RoutesName.country);
+                          })
+                    ]);
+                  }
+                  return const CircularProgressIndicator();
+                });
+          }),
           Consumer<ThemeProvider>(builder: (context, value, child) {
             final isDark = value.currentTheme == ThemeData.dark();
 
