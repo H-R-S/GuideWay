@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:guide_way/view/widgets/button/my_elevated_button.dart';
+import 'package:guide_way/view_models/auth/auth_view_model.dart';
+import 'package:provider/provider.dart';
 import '../../widgets/app_bar/my_app_bar.dart';
 import '../../widgets/text_field/my_text_field.dart';
 
@@ -15,6 +17,8 @@ class ChangePasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authViewModel = Provider.of<AuthViewModel>(context);
+
     return Scaffold(
         appBar: MyAppBar(scaffoldKey, context, title: "Change Password"),
         body: Padding(
@@ -42,7 +46,15 @@ class ChangePasswordScreen extends StatelessWidget {
                   controller: confirmPasswordController,
                   hint: "Confirm Password"),
               const SizedBox(height: 40),
-              MyElevatedButton(title: "Change Password", onTap: () {})
+              MyElevatedButton(
+                  isLoading: authViewModel.loading,
+                  title: "Change Password",
+                  onTap: () {
+                    authViewModel.changePassword(
+                        context,
+                        lastPasswordController.text.trim(),
+                        newPasswordController.text.trim());
+                  })
             ])));
   }
 }
