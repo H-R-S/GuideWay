@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:guide_way/resources/constants/images.dart';
 import 'package:provider/provider.dart';
+import '../../../resources/constants/images.dart';
 import '../../../resources/data/countries.dart';
-import '../../../routes/routes_name.dart';
 import '../../../theme/theme_provider.dart';
 import '../../../view_models/user/user_view_model.dart';
 import '../../widgets/button/my_elevated_button.dart';
@@ -92,10 +91,8 @@ class _CountryScreenState extends State<CountryScreen> {
                       isLoading: userViewModel.loading,
                       title: "Confirm",
                       onTap: () {
-                        userViewModel.updateUserCountry(
+                        userViewModel.updateUserCountry(context,
                             int.parse(countryIdController.text));
-                        Navigator.pushReplacementNamed(
-                            context, RoutesName.home);
                       })
                 ])));
   }
