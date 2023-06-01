@@ -159,7 +159,7 @@ class AuthViewModel with ChangeNotifier {
     final twitterLogin = TwitterLogin(
         apiKey: 'agdrngJStQ8bmjkJnvZmKd6CU',
         apiSecretKey: 'NYPcfWMERUGJWcJtVOGhWF9i1OYt900lsDCcTfIII0aeP0nQeN',
-        redirectURI: 'GuideWay://');
+        redirectURI: 'guideway://');
 
     final authResult = await twitterLogin.login();
 
