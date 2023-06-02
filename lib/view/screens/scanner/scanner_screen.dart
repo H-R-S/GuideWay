@@ -1,17 +1,23 @@
+import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+import 'package:guide_way/view/screens/translate/translate_screen.dart';
+import 'package:guide_way/view/widgets/button/my_elevated_button.dart';
 import 'package:permission_handler/permission_handler.dart';
-
 import '../../widgets/app_bar/my_app_bar.dart';
+import '../../widgets/dialog/animated_dialog.dart';
+import '../../widgets/snack_bar/my_snack_bar.dart';
 
 class ScannerScreen extends StatefulWidget {
-  ScannerScreen({super.key});
+  const ScannerScreen({super.key});
 
   @override
   State<ScannerScreen> createState() => _ScannerScreenState();
 }
 
-class _ScannerScreenState extends State<ScannerScreen> with WidgetsBindingObserver {
+class _ScannerScreenState extends State<ScannerScreen>
+    with WidgetsBindingObserver {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
   bool _isPermissionGranted = false;
@@ -19,7 +25,7 @@ class _ScannerScreenState extends State<ScannerScreen> with WidgetsBindingObserv
   late final Future<void> _future;
   CameraController? _cameraController;
 
-  // final textRecognizer = TextRecognizer();
+  final textRecognizer = TextRecognizer();
 
   @override
   void initState() {
@@ -33,7 +39,7 @@ class _ScannerScreenState extends State<ScannerScreen> with WidgetsBindingObserv
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     _stopCamera();
-    // textRecognizer.close();
+    textRecognizer.close();
     super.dispose();
   }
 
@@ -55,57 +61,45 @@ class _ScannerScreenState extends State<ScannerScreen> with WidgetsBindingObserv
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _future,
-      builder: (context, snapshot) {
-        return Stack(
-          children: [
+        future: _future,
+        builder: (context, snapshot) {
+          return Stack(children: [
             if (_isPermissionGranted)
               FutureBuilder<List<CameraDescription>>(
-                future: availableCameras(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    _initCameraController(snapshot.data!);
+                  future: availableCameras(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      _initCameraController(snapshot.data!);
 
-                    return Center(child: CameraPreview(_cameraController!));
-                  } else {
-                    return const LinearProgressIndicator();
-                  }
-                },
-              ),
+                      return Center(child: CameraPreview(_cameraController!));
+                    } else {
+                      return const LinearProgressIndicator();
+                    }
+                  }),
             Scaffold(
-              appBar: MyAppBar(scaffoldKey, context, title: "Scan"),
-              backgroundColor: _isPermissionGranted ? Colors.transparent : null,
-              body: _isPermissionGranted
-                  ? Column(
-                      children: [
+                appBar: MyAppBar(scaffoldKey, context, title: "Scan"),
+                backgroundColor:
+                    _isPermissionGranted ? Colors.transparent : null,
+                body: _isPermissionGranted
+                    ? Column(children: [
                         Expanded(
                           child: Container(),
                         ),
                         Container(
-                          padding: const EdgeInsets.only(bottom: 30.0),
-                          child: Center(
-                            child: ElevatedButton(
-                              onPressed: _scanImage,
-                              child: const Text('Scan text'),
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  : Center(
-                      child: Container(
-                        padding: const EdgeInsets.only(left: 24.0, right: 24.0),
-                        child: const Text(
-                          'Camera permission denied',
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-            ),
-          ],
-        );
-      },
-    );
+                            padding: const EdgeInsets.only(bottom: 30.0),
+                            child: Center(
+                                child: ElevatedButton(
+                                    onPressed: _scanImage,
+                                    child: const Text('Scan text'))))
+                      ])
+                    : Center(
+                        child: Container(
+                            padding:
+                                const EdgeInsets.only(left: 24.0, right: 24.0),
+                            child: const Text('Camera permission denied',
+                                textAlign: TextAlign.center))))
+          ]);
+        });
   }
 
   Future<void> _requestCameraPermission() async {
@@ -130,7 +124,6 @@ class _ScannerScreenState extends State<ScannerScreen> with WidgetsBindingObserv
       return;
     }
 
-    // Select the first rear camera.
     CameraDescription? camera;
     for (var i = 0; i < cameras.length; i++) {
       final CameraDescription current = cameras[i];
@@ -164,28 +157,38 @@ class _ScannerScreenState extends State<ScannerScreen> with WidgetsBindingObserv
   Future<void> _scanImage() async {
     if (_cameraController == null) return;
 
-    // final navigator = Navigator.of(context);
-
     try {
-      // final pictureFile = await _cameraController!.takePicture();
+      final pictureFile = await _cameraController!.takePicture();
 
-      // final file = File(pictureFile.path);
+      final file = File(pictureFile.path);
 
-      // final inputImage = InputImage.fromFile(file);
-      // final recognizedText = await textRecognizer.processImage("inputImage");
+      final inputImage = InputImage.fromFile(file);
+      final recognizedText = await textRecognizer.processImage(inputImage);
 
-      // await navigator.push(
-      //   MaterialPageRoute(
-      //     builder: (BuildContext context) =>
-      //         Container(text: recognizedText.text),
-      //   ),
-      // );
+      // ignore: use_build_context_synchronously
+      await AnimatedDialog(
+          context: context,
+          endOffSet: const Offset(0, 0),
+          child: SingleChildScrollView(
+              child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(mainAxisSize: MainAxisSize.min, children: [
+                    SizedBox(
+                      height: 300,
+                      child: Text(recognizedText.text)),
+                    const SizedBox(height: 20),
+                    MyElevatedButton(
+                        title: "Translate",
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => TranslateScreen(
+                                      text: recognizedText.text.toString())));
+                        })
+                  ]))));
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('An error occurred when scanning text'),
-        ),
-      );
+      MySnackBar(context, "An error occurred when scanning text");
     }
   }
 }
