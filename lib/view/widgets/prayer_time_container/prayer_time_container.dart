@@ -3,15 +3,15 @@ import 'package:provider/provider.dart';
 import '../../../theme/theme_provider.dart';
 
 class PrayerTimeContainer extends StatelessWidget {
-  final String? name, azanTime, iqamaTime;
-  final bool isHeader;
+  final String? title, value;
+  final bool isHeader, isInfoHeader;
 
   const PrayerTimeContainer(
       {super.key,
+      this.isInfoHeader = false,
       this.isHeader = false,
-      this.name,
-      this.azanTime,
-      this.iqamaTime});
+      this.title,
+      this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +19,8 @@ class PrayerTimeContainer extends StatelessWidget {
 
     bool isDark = themeProvider.currentTheme == ThemeData.dark();
 
-    double width = MediaQuery.of(context).size.width;
     final style = TextStyle(
-        color: isDark && isHeader
+        color: isDark && isHeader || isInfoHeader
             ? Colors.white
             : isHeader
                 ? Colors.grey
@@ -31,32 +30,20 @@ class PrayerTimeContainer extends StatelessWidget {
 
     return Padding(
         padding: EdgeInsets.symmetric(vertical: isHeader ? 20 : 10),
-        child: isHeader
+        child: 
+        isInfoHeader ? Text("Islamic Calender", style: style) :
+        isHeader
             ? Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                SizedBox(
-                    width: width * 0.3, child: Text("Prayer", style: style)),
-                SizedBox(
-                    width: width * 0.3, child: Text("Adhan", style: style)),
-                SizedBox(width: width * 0.3, child: Text("Iqama", style: style))
+                Text("Prayer", style: style),
+                Text("Adhan", style: style)
               ])
             : Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                SizedBox(
-                    width: width * 0.3,
-                    child: Text(name ?? "",
-                        style: style.copyWith(
-                            color: isDark ? Colors.grey : null))),
-                SizedBox(
-                    width: width * 0.3,
-                    child: Text(azanTime ?? "",
-                        style: style.copyWith(
-                            color: isDark ? Colors.grey : null,
-                            fontWeight: FontWeight.normal))),
-                SizedBox(
-                    width: width * 0.3,
-                    child: Text(iqamaTime ?? "",
-                        style: style.copyWith(
-                            color: isDark ? Colors.grey : null,
-                            fontWeight: FontWeight.normal)))
+                Text(title ?? "",
+                    style: style.copyWith(color: isDark ? Colors.grey : null)),
+                Text(value ?? "",
+                    style: style.copyWith(
+                        color: isDark ? Colors.grey : null,
+                        fontWeight: FontWeight.normal))
               ]));
   }
 }
