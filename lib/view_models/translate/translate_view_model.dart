@@ -20,7 +20,7 @@ class TranslateViewModel with ChangeNotifier {
     setLanguages(ApiResponse.loading());
 
     _translateRepo.getLanguagesApi(
-        {"X-RapidAPI-Key": ApiKeys.translateApiKey}).then((value) {
+        {"X-RapidAPI-Key": ApiKeys.rapidApiKey}).then((value) {
       setLanguages(ApiResponse.completed(value.data!.languages));
     }).onError((error, stackTrace) {
       setLanguages(ApiResponse.error(error.toString()));
@@ -39,7 +39,7 @@ class TranslateViewModel with ChangeNotifier {
     setTranslation(ApiResponse.loading());
 
     _translateRepo.translateApi({
-      "X-RapidAPI-Key": ApiKeys.translateApiKey,
+      "X-RapidAPI-Key": ApiKeys.rapidApiKey,
       'Content-Type': 'application/x-www-form-urlencoded'
     }, {
       'target_language': targetLanguage,
