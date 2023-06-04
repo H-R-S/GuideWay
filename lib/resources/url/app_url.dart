@@ -16,4 +16,9 @@ class AppURL {
   static var basePrayerUrl = "https://api.aladhan.com";
 
   static var getPrayerTimingsEndPoint = "$basePrayerUrl/v1/timings";
+
+  // Weather API
+  static var baseWeatherUrl = "https://weatherapi-com.p.rapidapi.com";
+
+  static var getWeatherEndPoint = "$baseWeatherUrl/forecast.json";
 }
