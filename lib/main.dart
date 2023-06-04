@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:guide_way/view_models/prayer/prayer_view_model.dart';
 import 'package:guide_way/view_models/translate/translate_view_model.dart';
+import 'package:guide_way/view_models/weather/weather_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -44,6 +45,7 @@ class _MyAppState extends State<MyApp> {
           ChangeNotifierProvider(create: (context) => UserViewModel()),          
           ChangeNotifierProvider(create: (context) => TranslateViewModel()),
           ChangeNotifierProvider(create: (context) => PrayerViewModel()),
+          ChangeNotifierProvider(create: (context) => WeatherViewModel()),
           ChangeNotifierProvider(create: (context) => ThemeProvider())
         ],
         child: ChangeNotifierProvider(
