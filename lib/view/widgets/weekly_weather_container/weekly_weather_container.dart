@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../../theme/theme_provider.dart';
 
 class WeeklyWeatherContainer extends StatelessWidget {
@@ -30,10 +29,10 @@ class WeeklyWeatherContainer extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 10),
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          SizedBox(width: width * 0.35, child: Text(day, style: style)),
-          SizedBox(width: width * 0.25, child: Image.asset(icon, height: 40)),
+          SizedBox(width: width * 0.2, child: Text(day, style: style)),
+          SizedBox(width: width * 0.3, child: Image.asset(icon, height: 40)),
           SizedBox(
-              width: width * 0.2,
+              width: width * 0.3,
               child: Row(mainAxisSize: MainAxisSize.min, children: [
                 Text("$dayTemperature° ",
                     style: style.copyWith(fontWeight: FontWeight.normal)),
