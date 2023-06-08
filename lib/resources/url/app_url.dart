@@ -7,10 +7,10 @@ class AppURL {
   static var getTranslationEndPoint = "$baseTranslateUrl/translate";
 
   // Currency API's 
-  static var baseCurrencyUrl = "https://currency-converter-pro1.p.rapidapi.com";
+  static var baseCurrencyUrl = "https://currency-converter18.p.rapidapi.com";
 
-  static var getCurrenciesEndPoint = "$baseCurrencyUrl/currencies";
-  static var getCurrencyConvertEndPoint = "$baseCurrencyUrl/convert";
+  static var getCurrenciesEndPoint = "$baseCurrencyUrl/api/v1/supportedCurrencies";
+  static var getCurrencyConvertEndPoint = "$baseCurrencyUrl/api/v1/convert";
 
   // Prayer's Timing API
   static var basePrayerUrl = "https://api.aladhan.com";
