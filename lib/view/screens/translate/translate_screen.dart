@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:guide_way/data/responses/status.dart';
-import 'package:guide_way/view_models/translate/translate_view_model.dart';
 import 'package:provider/provider.dart';
+import '../../../data/responses/status.dart';
 import '../../../theme/theme_provider.dart';
+import '../../../view_models/translate/translate_view_model.dart';
 import '../../widgets/app_bar/my_app_bar.dart';
 import '../../widgets/button/my_elevated_button.dart';
+import '../../widgets/loading_indicator/my_loading_indicator.dart';
 import '../../widgets/search_drop_down/search_drop_down.dart';
 import '../../widgets/text_field/my_text_field.dart';
 
@@ -51,7 +52,7 @@ class _TranslateScreenState extends State<TranslateScreen> {
                 builder: (context, snapshot) {
                   return Column(children: [
                     MyTextField(
-                        header: "English (US)",
+                        header: "Auto Detect",
                         minLine: 5,
                         controller: textController,
                         hint: "Enter Text"),
@@ -74,7 +75,7 @@ class _TranslateScreenState extends State<TranslateScreen> {
                               });
 
                         default:
-                          return const CircularProgressIndicator();
+                          return const MyLoadingIndicator();
                       }
                     }),
                     const SizedBox(height: 20),
@@ -102,13 +103,14 @@ class _TranslateScreenState extends State<TranslateScreen> {
                                         color: isDark
                                             ? Colors.white
                                             : Colors.grey)),
-                                child: Text(translation,
-                                    style: TextStyle(
-                                        color: isDark ? Colors.white : null,
-                                        fontSize: 18)));
+                                child: SingleChildScrollView(
+                                    child: Text(translation,
+                                        style: TextStyle(
+                                            color: isDark ? Colors.white : null,
+                                            fontSize: 18))));
 
                           default:
-                            return const CircularProgressIndicator();
+                            return const MyLoadingIndicator();
                         }
                       }),
                     const SizedBox(height: 40),
