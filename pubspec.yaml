@@ -86,6 +86,8 @@ dependencies:
 
   # Search Dropdown
   dropdown_search: ^5.0.6
+
+  # FLutter Qiblah Direction
   flutter_qiblah: ^2.1.0
 
 dev_dependencies:
