@@ -1,19 +1,21 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:guide_way/view_models/prayer/prayer_view_model.dart';
-import 'package:guide_way/view_models/translate/translate_view_model.dart';
-import 'package:guide_way/view_models/weather/weather_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'routes/routes.dart';
 import 'theme/theme_provider.dart';
 import 'view/screens/login/login_screen.dart';
+import 'view/screens/on_boarding/on_boarding_screen.dart';
 import 'view/screens/splash/splash_screen.dart';
 import 'view/widgets/snack_bar/my_snack_bar.dart';
 import 'view_models/auth/auth_view_model.dart';
+import 'view_models/faq/faq_view_model.dart';
+import 'view_models/prayer/prayer_view_model.dart';
+import 'view_models/translate/translate_view_model.dart';
 import 'view_models/user/user_view_model.dart';
+import 'view_models/weather/weather_view_model.dart';
 
 int? initScreen;
 
@@ -42,10 +44,11 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => AuthViewModel()),
-          ChangeNotifierProvider(create: (context) => UserViewModel()),          
+          ChangeNotifierProvider(create: (context) => UserViewModel()),
           ChangeNotifierProvider(create: (context) => TranslateViewModel()),
           ChangeNotifierProvider(create: (context) => PrayerViewModel()),
           ChangeNotifierProvider(create: (context) => WeatherViewModel()),
+          ChangeNotifierProvider(create: (context) => FAQViewModel()),
           ChangeNotifierProvider(create: (context) => ThemeProvider())
         ],
         child: ChangeNotifierProvider(
@@ -69,14 +72,15 @@ class _MyAppState extends State<MyApp> {
                         } else if (snapshot.hasError) {
                           return MySnackBar(context, snapshot.error.toString());
                         } else if (snapshot.hasData) {
-                          return const SplashScreen();
+                          if (initScreen == 0 || initScreen == null) {
+                            return OnBoardingScreen();
+                          } else {
+                            return const SplashScreen();
+                          }
                         } else {
                           return LoginScreen();
                         }
                       }));
-              // initialRoute: initScreen == 0 || initScreen == null
-              //     ? RoutesName.onBoarding
-              //     : RoutesName.home);
             }));
   }
 }
