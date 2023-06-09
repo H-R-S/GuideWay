@@ -1,31 +1,46 @@
 import 'package:flutter/material.dart';
-import '../../../resources/data/faq.dart';
+import 'package:provider/provider.dart';
+import '../../../models/faq/faq_model.dart';
+import '../../../view_models/faq/faq_view_model.dart';
 import '../../widgets/app_bar/my_app_bar.dart';
 import '../../widgets/faq_container/faq_container.dart';
+import '../../widgets/loading_indicator/my_loading_indicator.dart';
 
 class ChatScreen extends StatelessWidget {
   ChatScreen({super.key});
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
-  final TextEditingController chatController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: MyAppBar(scaffoldKey, context, title: "FAQ"),
         body: SingleChildScrollView(
-          child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: faq.length,
-                  itemBuilder: (context, index) {
-                    return FAQContainer(
-                        question: faq[index]["question"],
-                        answer: faq[index]["answer"]);
-                  })),
-        ));
+            child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Consumer<FAQViewModel>(builder: (context, value, child) {
+                  return StreamBuilder<List<FAQModel>>(
+                      stream: value.getFAQs(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          debugPrint(snapshot.error.toString());
+                          return Container();
+                        } else if (snapshot.hasData) {
+                          return ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: (context, index) {
+                                final faq = snapshot.data![index];
+
+                                return FAQContainer(
+                                    question: faq.question ?? "",
+                                    answer: faq.answer ?? "");
+                              });
+                        } else {
+                          return const MyLoadingIndicator();
+                        }
+                      });
+                }))));
   }
 }
