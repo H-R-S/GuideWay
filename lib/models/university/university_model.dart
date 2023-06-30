@@ -6,6 +6,8 @@ class UniversityModel {
   final num? id;
   final String? name;
   final String? website;
+  final String? state;
+  final String? city;
   final List<String>? images;
   final String? thumnailImage;
   final String? description;
@@ -18,6 +20,8 @@ class UniversityModel {
   UniversityModel(
       {this.id,
       this.name,
+      this.city,
+      this.state,
       this.website,
       this.images,
       this.thumnailImage,
@@ -34,6 +38,8 @@ class UniversityModel {
     return UniversityModel(
         id: data["id"],
         name: data["name"],
+        city: data["city"],
+        state: data["state"],
         website: data["website"],
         images: data["images"],
         thumnailImage: data["thumnailImage"],
@@ -48,6 +54,8 @@ class UniversityModel {
   static UniversityModel fromJson(Map<String, dynamic> json) => UniversityModel(
       id: json['id'],
       name: json['name'],
+      city: json['city'],
+      state: json['state'],
       website: json['website'],
       images: json['images'],
       thumnailImage: json['thumnailImage'],
@@ -61,6 +69,8 @@ class UniversityModel {
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
+        "city": city,
+        "state": state,
         "website": website,
         "images": images,
         "thumnailImage": thumnailImage,
