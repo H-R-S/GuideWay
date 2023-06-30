@@ -45,6 +45,7 @@ dependencies:
   firebase_core: ^2.13.0
   firebase_auth: ^4.6.1
   cloud_firestore: ^4.7.1
+  firebase_storage: ^11.2.4
 
   # Google SignIN
   google_sign_in: ^6.1.2
@@ -89,6 +90,9 @@ dependencies:
 
   # FLutter Qiblah Direction
   flutter_qiblah: ^2.1.0
+
+  # Image Picker
+  image_picker: ^1.0.0
 
 dev_dependencies:
   flutter_test:
