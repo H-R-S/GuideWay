@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import '../../../models/faq/faq_model.dart';
 import '../../../view_models/faq/faq_view_model.dart';
 import '../../widgets/app_bar/my_app_bar.dart';
-import '../../widgets/button/messenger_button..dart';
+import '../../widgets/button/messenger_button.dart';
 import '../../widgets/faq_container/faq_container.dart';
 import '../../widgets/loading_indicator/my_loading_indicator.dart';
 import '../../widgets/messenger_container/messenger_container.dart';
