@@ -1,4 +1,7 @@
 class AppURL {
+
+  static var messengerEndPoint = "http://m.me/100094191371265";
+  static var facebookEndPoint = "https://www.facebook.com/people/GuideWay/100094191371265/";
   
   // Translate API's
   static var baseTranslateUrl = "https://text-translator2.p.rapidapi.com";
