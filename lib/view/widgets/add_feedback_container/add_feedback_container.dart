@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../resources/constants/style.dart';
+import '../../../theme/theme_provider.dart';
 import '../button/my_elevated_button.dart';
 import '../text_field/my_text_field.dart';
 
@@ -16,8 +19,21 @@ class AddFeedBackContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    final theme = Provider.of<ThemeProvider>(context);
+
+    bool isDark = theme.currentTheme == ThemeData.dark();
+
+    // final style = TextStyle(
+    //     color: isDark ? Colors.white : null,
+    //     fontWeight: FontWeight.bold,
+    //     fontSize: 20);
+
+    return Container(
         padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+            color: isDark ? dark : null,
+            borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(30), topRight: Radius.circular(30))),
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           MyTextField(
               header: "FeedBack Reason",
