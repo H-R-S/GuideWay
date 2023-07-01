@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:guide_way/services/formatter/formatter.dart';
+import 'package:guide_way/services/formatter/formatter_service.dart';
 import 'package:provider/provider.dart';
 import '../../../resources/constants/style.dart';
 import '../../../theme/theme_provider.dart';
