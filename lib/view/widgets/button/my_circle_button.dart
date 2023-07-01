@@ -12,7 +12,7 @@ class MyCircleButton extends StatelessWidget {
         onTap: onTap,
         child: CircleAvatar(
           radius: 25, 
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.transparent,
           backgroundImage: AssetImage(icon)));
   }
 }
