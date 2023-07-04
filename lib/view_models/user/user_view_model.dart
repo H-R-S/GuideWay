@@ -18,11 +18,21 @@ class UserViewModel with ChangeNotifier {
     notifyListeners();
   }
 
+  num _countryId = 0;
+
+  num get countryId => _countryId;
+
+  setCountryId(num value) {
+    _countryId = value;
+    notifyListeners();
+  }
+
   updateUserCountry(BuildContext context, int countryId) async {
     setLoading(true);
     final userCollection =
         FirebaseFirestore.instance.collection("users").doc(user!.uid);
     saveCountryId(countryId);
+    setCountryId(countryId);
     await userCollection.update({"countryId": countryId}).then((value) {
       setLoading(false);
       MySnackBar(context, "Country updated");
@@ -63,10 +73,10 @@ class UserViewModel with ChangeNotifier {
     return true;
   }
 
-  Future<int?> getCountryId() async {
+  Future<int> getCountryId() async {
     final SharedPreferences sp = await SharedPreferences.getInstance();
     final int? countryId = sp.getInt('countryId');
-    return countryId;
+    return countryId ?? 0;
   }
 
   Future<UserModel?> getUser() async {
@@ -76,6 +86,7 @@ class UserViewModel with ChangeNotifier {
     final userSnapshot = await docUser.get();
 
     if (userSnapshot.exists) {
+      setCountryId(userSnapshot.get("countryId"));
       return UserModel.fromJson(userSnapshot.data()!);
     }
     return UserModel();
