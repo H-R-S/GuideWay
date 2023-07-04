@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:guide_way/resources/data/rules.dart';
 import 'package:provider/provider.dart';
+import '../../../models/rule/rule_model.dart';
 import '../../../theme/theme_provider.dart';
+import '../../../view_models/rule/rule_view_model.dart';
+import '../../../view_models/user/user_view_model.dart';
 import '../../widgets/app_bar/my_app_bar.dart';
+import '../../widgets/loading_indicator/my_loading_indicator.dart';
 
 class AirportRulesScreen extends StatelessWidget {
   AirportRulesScreen({super.key});
@@ -20,15 +23,39 @@ class AirportRulesScreen extends StatelessWidget {
         fontSize: 18,
         fontWeight: FontWeight.normal);
 
-    return Scaffold(
+    final userViewModel = Provider.of<UserViewModel>(context);
+
+      return Scaffold(
         appBar: MyAppBar(scaffoldKey, context, title: "Airport Rules"),
-        body: SingleChildScrollView(
+         body: SingleChildScrollView(
             child: Padding(
                 padding: const EdgeInsets.all(20),
-                child: Column(children: [
-                  Text(airportRules[0]["description"], style: style),
-                  const SizedBox(height: 20),
-                  Text(airportRules[0]["rules"], style: style)
-                ]))));
-  }
+                child:
+                    Consumer<RuleViewModel>(builder: (context, value, child) {
+                  return StreamBuilder<List<RuleModel>>(
+                      stream: value.getRules(context, "Airport Rules", userViewModel.countryId),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          debugPrint(snapshot.error.toString());
+                          return Container();
+                        } else if (snapshot.hasData) {
+                          return ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: (context, index) {
+                                final rule = snapshot.data![index];
+
+                                return Column(children: [
+                                  Text(rule.description ?? "", style: style),
+                                  const SizedBox(height: 20),
+                                  Text(rule.rules ?? "", style: style)
+                                ]);
+                              });
+                        } else {
+                          return const MyLoadingIndicator();
+                        }
+                      });
+                }))));
+    }
 }
