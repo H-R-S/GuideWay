@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:guide_way/services/notification/notification_service.dart';
 import 'package:guide_way/theme/theme_provider.dart';
 import 'package:guide_way/view/screens/faq/faq_screen.dart';
 import 'package:guide_way/view/screens/scanner/scanner_screen.dart';
@@ -19,8 +20,16 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int currentIndex = 0;
 
+  NotificationService notificationService = NotificationService();
+
   @override
   void initState() {
+    notificationService.requestNotificationPermission();
+    notificationService.firebaseInit(context);
+    notificationService.setupInterectMessage(context);
+    notificationService.getDeviceToken().then((value) {
+      debugPrint("Device Token: $value");
+    });
     super.initState();
   }
 
