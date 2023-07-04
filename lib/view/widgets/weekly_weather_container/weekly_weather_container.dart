@@ -22,14 +22,14 @@ class WeeklyWeatherContainer extends StatelessWidget {
 
     final style = TextStyle(
         color: isDark ? Colors.white : null,
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: FontWeight.bold);
 
     return Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          SizedBox(width: width * 0.2, child: Text(day, style: style)),
+          SizedBox(width: width * 0.3, child: Text(day, style: style)),
           SizedBox(width: width * 0.3, child: Image.asset(icon, height: 40)),
           SizedBox(
               width: width * 0.3,
