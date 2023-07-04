@@ -1,33 +1,61 @@
 import 'package:flutter/material.dart';
-import 'package:guide_way/resources/data/rules.dart';
 import 'package:provider/provider.dart';
+import '../../../models/rule/rule_model.dart';
 import '../../../theme/theme_provider.dart';
+import '../../../view_models/rule/rule_view_model.dart';
+import '../../../view_models/user/user_view_model.dart';
 import '../../widgets/app_bar/my_app_bar.dart';
+import '../../widgets/loading_indicator/my_loading_indicator.dart';
 
 class DrivingRulesScreen extends StatelessWidget {
   DrivingRulesScreen({super.key});
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
-    @override
+  @override
   Widget build(BuildContext context) {
-final themeProvider = Provider.of<ThemeProvider>(context);
+    final themeProvider = Provider.of<ThemeProvider>(context);
 
     bool isDark = themeProvider.currentTheme == ThemeData.dark();
-    
+
     final style = TextStyle(
-      color: isDark ? Colors.white : null,
-      fontSize: 18, fontWeight: FontWeight.normal);
-      
-    return Scaffold(
+        color: isDark ? Colors.white : null,
+        fontSize: 18,
+        fontWeight: FontWeight.normal);
+
+     final userViewModel = Provider.of<UserViewModel>(context);
+
+      return Scaffold(
         appBar: MyAppBar(scaffoldKey, context, title: "Driving Rules"),
-        body: SingleChildScrollView(
+         body: SingleChildScrollView(
             child: Padding(
                 padding: const EdgeInsets.all(20),
-                child: Column(children: [
-                  Text(drivingRules[0]["description"], style: style),
-                  const SizedBox(height: 20),
-                  Text(drivingRules[0]["rules"], style: style)
-                ]))));
+                child:
+                    Consumer<RuleViewModel>(builder: (context, value, child) {
+                  return StreamBuilder<List<RuleModel>>(
+                      stream: value.getRules(context, "Driving Rules", userViewModel.countryId),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          debugPrint(snapshot.error.toString());
+                          return Container();
+                        } else if (snapshot.hasData) {
+                          return ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: (context, index) {
+                                final rule = snapshot.data![index];
+
+                                return Column(children: [
+                                  Text(rule.description ?? "", style: style),
+                                  const SizedBox(height: 20),
+                                  Text(rule.rules ?? "", style: style)
+                                ]);
+                              });
+                        } else {
+                          return const MyLoadingIndicator();
+                        }
+                      });
+                }))));
   }
 }
