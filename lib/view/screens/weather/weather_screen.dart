@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:guide_way/data/responses/status.dart';
-import 'package:guide_way/view_models/weather/weather_view_model.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import '../../../data/responses/status.dart';
+import '../../../view_models/weather/weather_view_model.dart';
 import '../../widgets/app_bar/my_app_bar.dart';
 import '../../widgets/hourly_weather_container/hourly_weather_container.dart';
+import '../../widgets/loading_indicator/my_loading_indicator.dart';
 import '../../widgets/weather_header/weather_header.dart';
 import '../../widgets/weekly_weather_container/weekly_weather_container.dart';
 
@@ -118,7 +119,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                 })
                           ]))));
                 default:
-                  return const Center(child: CircularProgressIndicator());
+                  return const MyLoadingIndicator();
               }
             })));
   }
