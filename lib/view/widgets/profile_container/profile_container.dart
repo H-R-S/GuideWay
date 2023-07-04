@@ -33,7 +33,7 @@ class ProfileContainer extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             width: double.infinity,
             decoration: BoxDecoration(
-                color: isDark ? Color(0xff222831) : primaryLight,
+                color: isDark ? dark : primaryLight,
                 boxShadow: [
                   BoxShadow(
                       color: isDark ? Colors.black12 : Colors.grey,
