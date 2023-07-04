@@ -1,22 +1,15 @@
 import 'dart:io';
-
-import 'package:camera/camera.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:guide_way/models/university/university_model.dart';
-import 'package:guide_way/resources/data/universities.dart';
-import 'package:guide_way/routes/routes.dart';
-import 'package:guide_way/view/screens/detail/detail_screen.dart';
-import 'package:guide_way/view/widgets/button/my_elevated_button.dart';
-import 'package:guide_way/view/widgets/text_field/my_text_field.dart';
-import 'package:guide_way/view_models/university/university_view_model.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import '../../../models/country/country_model.dart';
-import '../../../resources/constants/flags.dart';
+import '../../../models/university/university_model.dart';
+import '../../../view_models/university/university_view_model.dart';
 import '../../widgets/app_bar/my_app_bar.dart';
-import '../../widgets/image_container/image_container.dart';
+import '../../widgets/button/my_elevated_button.dart';
+import '../../widgets/text_field/my_text_field.dart';
 
 class UniversitiesScreen extends StatefulWidget {
   UniversitiesScreen({super.key});
