@@ -9,7 +9,9 @@ import '../../widgets/country_container/country_container.dart';
 import '../../widgets/search_bar/my_search_bar.dart';
 
 class CountryScreen extends StatefulWidget {
-  const CountryScreen({super.key});
+  final int? countryId;
+
+  const CountryScreen({super.key, this.countryId});
 
   @override
   State<CountryScreen> createState() => _CountryScreenState();
@@ -20,6 +22,24 @@ class _CountryScreenState extends State<CountryScreen> {
   TextEditingController countryIdController = TextEditingController();
 
   bool isChecked = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.countryId != null) {
+      int index =
+          countries.indexWhere((country) => country.id == widget.countryId);
+
+      if (index >= 0) {
+        setState(() {
+          seletedIndex = index;
+          searchController.text = countries[index].name!;
+          countryIdController.text = countries[index].id.toString();
+        });
+      }
+    }
+  }
+
   int seletedIndex = 0;
 
   onSeleted(int index) {
@@ -91,8 +111,8 @@ class _CountryScreenState extends State<CountryScreen> {
                       isLoading: userViewModel.loading,
                       title: "Confirm",
                       onTap: () {
-                        userViewModel.updateUserCountry(context,
-                            int.parse(countryIdController.text));
+                        userViewModel.updateUserCountry(
+                            context, int.parse(countryIdController.text));
                       })
                 ])));
   }
