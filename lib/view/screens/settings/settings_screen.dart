@@ -10,8 +10,10 @@ import '../../../theme/theme_provider.dart';
 import '../../../view_models/auth/auth_view_model.dart';
 import '../../../view_models/user/user_view_model.dart';
 import '../../widgets/app_bar/my_app_bar.dart';
+import '../../widgets/loading_indicator/my_loading_indicator.dart';
 import '../../widgets/profile_container/profile_container.dart';
 import '../../widgets/settings_container/settings_container.dart';
+import '../country/country_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   SettingsScreen({super.key});
@@ -68,12 +70,16 @@ class SettingsScreen extends StatelessWidget {
                           title: "Country",
                           subTitle: "Change your desire country",
                           onTap: () {
-                            Navigator.pushReplacementNamed(
-                                context, RoutesName.country);
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CountryScreen(
+                                        countryId: int.parse(
+                                            user.countryId.toString()))));
                           })
                     ]);
                   }
-                  return const CircularProgressIndicator();
+                  return const MyLoadingIndicator();
                 });
           }),
           Consumer<ThemeProvider>(builder: (context, value, child) {
