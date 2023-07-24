@@ -36,6 +36,9 @@ const String termsAndConditionIcon =
     "assets/icons/terms_and_condition_icon.png";
 const String qiblaCompasIcon = "assets/icons/qibla_compas_icon.png";
 const String passwordIcon = "assets/icons/password_icon.png";
+const String noNotificationIcon = "assets/icons/no_notification_icon.png";
+const String errorIcon = "assets/icons/error_icon.png";
+
 
 // Weather Icons
 const String cloudyIcon = "assets/icons/cloudy_weather_icon.png";
