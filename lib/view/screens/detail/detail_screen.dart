@@ -1,21 +1,23 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:guide_way/view/widgets/button/my_elevated_button.dart';
 import 'package:provider/provider.dart';
-import '../../../resources/constants/images.dart';
 import '../../../theme/theme_provider.dart';
 import '../../widgets/app_bar/my_app_bar.dart';
+import '../../widgets/button/my_elevated_button.dart';
 import '../../widgets/google_map/google_map_container.dart';
 import '../../widgets/image_slider/image_slider.dart';
+import '../web_view/web_view_screen.dart';
 
 class DetailScreen extends StatelessWidget {
   final String? title, description, website, latitude, longitude;
+  final List<dynamic>? images;
   final bool isWebsite;
 
   DetailScreen(
       {super.key,
       this.isWebsite = false,
       this.title,
+      this.images,
       this.description,
       this.website,
       this.latitude,
@@ -33,7 +35,7 @@ class DetailScreen extends StatelessWidget {
 
     final style = TextStyle(
         color: isDark ? Colors.white : null,
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: FontWeight.normal);
 
     return Scaffold(
@@ -42,18 +44,20 @@ class DetailScreen extends StatelessWidget {
         floatingActionButton: isWebsite
             ? Padding(
                 padding: const EdgeInsets.all(20),
-                child: MyElevatedButton(title: "Visit Website", onTap: () {}),
-              )
+                child: MyElevatedButton(
+                    title: "Visit Website",
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WebViewScreen(
+                                  url: website, title: title ?? "")));
+                    }))
             : null,
         body: SingleChildScrollView(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          ImageSlider(controller: controller, items: const [
-            londonImage,
-            edinburghImage,
-            stonehengeImage,
-            lakeDistrictImage
-          ]),
+          ImageSlider(controller: controller, items: images),
           Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
@@ -62,14 +66,14 @@ class DetailScreen extends StatelessWidget {
                     Text(title!,
                         style: style.copyWith(fontWeight: FontWeight.bold)),
                     if (description != null)
-                      Text(description!, style: style.copyWith(fontSize: 18)),
+                      Text(description!, style: style.copyWith(fontSize: 16)),
                     const SizedBox(height: 20),
                     Text("Location:",
                         style: style.copyWith(fontWeight: FontWeight.bold)),
                     GoogleMapContainer(
                         title: title!,
-                        latitude: 24.8395749,
-                        longitude: 67.0823143),
+                        latitude: double.parse(latitude!),
+                        longitude: double.parse(longitude!)),
                     const SizedBox(height: 40)
                   ]))
         ])));
