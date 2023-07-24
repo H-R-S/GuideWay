@@ -4,6 +4,7 @@ import '../../../resources/constants/style.dart';
 import '../../../view_models/feedback/feedback_view_model.dart';
 import '../../widgets/add_feedback_container/add_feedback_container.dart';
 import '../../widgets/app_bar/my_app_bar.dart';
+import '../../widgets/error_container/error_container.dart';
 import '../../widgets/feedback_container/feedback_container.dart';
 import '../../widgets/loading_indicator/my_loading_indicator.dart';
 
@@ -45,7 +46,8 @@ class FeedBackScreen extends StatelessWidget {
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       debugPrint(snapshot.error.toString());
-                      return Container();
+                      return ErrorContainer(
+                          description: snapshot.error.toString());
                     }
 
                     if (snapshot.hasData) {
