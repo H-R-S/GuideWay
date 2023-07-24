@@ -5,6 +5,7 @@ import '../../../theme/theme_provider.dart';
 import '../../../view_models/rule/rule_view_model.dart';
 import '../../../view_models/user/user_view_model.dart';
 import '../../widgets/app_bar/my_app_bar.dart';
+import '../../widgets/error_container/error_container.dart';
 import '../../widgets/loading_indicator/my_loading_indicator.dart';
 
 class AirportRulesScreen extends StatelessWidget {
@@ -37,7 +38,9 @@ class AirportRulesScreen extends StatelessWidget {
                       builder: (context, snapshot) {
                         if (snapshot.hasError) {
                           debugPrint(snapshot.error.toString());
-                          return Container();
+                          return ErrorContainer(
+                            description: snapshot.error.toString());
+
                         } else if (snapshot.hasData) {
                           return ListView.builder(
                               shrinkWrap: true,
