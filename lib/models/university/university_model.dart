@@ -1,6 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../country/country_model.dart';
-import '../review/review_model.dart';
 
 class UniversityModel {
   final num? id;
@@ -8,14 +6,14 @@ class UniversityModel {
   final String? website;
   final String? state;
   final String? city;
-  final List<String>? images;
+  final List<dynamic>? images;
   final String? thumnailImage;
   final String? description;
-  final CountryModel? country;
+  final int? countryId;
   final num? latitude;
   final num? longitude;
   final num? rating;
-  final List<ReviewModel>? reviews;
+  final List<dynamic>? reviews;
 
   UniversityModel(
       {this.id,
@@ -26,7 +24,7 @@ class UniversityModel {
       this.images,
       this.thumnailImage,
       this.description,
-      this.country,
+      this.countryId,
       this.latitude,
       this.longitude,
       this.rating,
@@ -44,7 +42,7 @@ class UniversityModel {
         images: data["images"],
         thumnailImage: data["thumnailImage"],
         description: data["description"],
-        country: data["country"],
+        countryId: data["countryId"],
         latitude: data["latitude"],
         longitude: data["longitude"],
         rating: data["rating"],
@@ -60,7 +58,7 @@ class UniversityModel {
       images: json['images'],
       thumnailImage: json['thumnailImage'],
       description: json["description"],
-      country: json["country"],
+      countryId: json["countryId"],
       latitude: json["latitude"],
       longitude: json["longitude"],
       rating: json["rating"],
@@ -75,7 +73,7 @@ class UniversityModel {
         "images": images,
         "thumnailImage": thumnailImage,
         "description": description,
-        "country": country,
+        "countryId": countryId,
         "latitude": latitude,
         "longitude": longitude,
         "rating": rating,
