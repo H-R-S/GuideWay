@@ -65,13 +65,13 @@ class _CountryScreenState extends State<CountryScreen> {
                   Text("Find Your Destination",
                       style: TextStyle(
                           color: isDark ? Colors.white : null,
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold)),
                   const Text(
                       "Browse the list of countries below and select where you want to travel abroad with GuideWay.",
                       style: TextStyle(
                           color: Colors.grey,
-                          fontSize: 16,
+                          fontSize: 14,
                           fontWeight: FontWeight.normal)),
                   const SizedBox(height: 40),
                   MySearchBar(
