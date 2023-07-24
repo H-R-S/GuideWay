@@ -4,6 +4,7 @@ import '../../../data/responses/status.dart';
 import '../../../view_models/currency/currency_view_model.dart';
 import '../../widgets/app_bar/my_app_bar.dart';
 import '../../widgets/button/my_elevated_button.dart';
+import '../../widgets/error_container/error_container.dart';
 import '../../widgets/loading_indicator/my_loading_indicator.dart';
 import '../../widgets/search_drop_down/search_drop_down.dart';
 import '../../widgets/text_field/my_text_field.dart';
@@ -45,7 +46,8 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
               switch (value.currencyList.status) {
                 case Status.ERROR:
                   debugPrint(value.currencyList.message);
-                  return Container();
+                  return ErrorContainer(
+                      description: value.currencyList.message);
 
                 case Status.COMPLETED:
                   final currency = value.currencyList.data!;
