@@ -7,6 +7,7 @@ import '../../../models/user/user_model.dart';
 import '../../../resources/data/countries.dart';
 import '../../../view_models/user/user_view_model.dart';
 import '../../widgets/app_bar/my_app_bar.dart';
+import '../../widgets/loading_indicator/my_loading_indicator.dart';
 
 class LocationScreen extends StatefulWidget {
   const LocationScreen({super.key});
@@ -71,7 +72,7 @@ class _LocationScreenState extends State<LocationScreen> {
                         _controller.complete(controller);
                       });
                 } else {
-                  return const Center(child: CircularProgressIndicator());
+                  return const MyLoadingIndicator();
                 }
               });
         }));
