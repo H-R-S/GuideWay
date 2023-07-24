@@ -38,14 +38,14 @@ class LoginScreen extends StatelessWidget {
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Image.asset(guideWayIcon, height: 50),
+                                Image.asset(guideWayIcon, height: 40),
                                 const SizedBox(width: 20),
                                 Padding(
                                     padding: const EdgeInsets.only(top: 13),
                                     child: Text("GuideWay",
                                         style: TextStyle(
                                             color: isDark ? Colors.white : null,
-                                            fontSize: 35,
+                                            fontSize: 30,
                                             fontWeight: FontWeight.bold)))
                               ]),
                           const SizedBox(height: 20),
