@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:guide_way/view/widgets/dialog/animated_dialog.dart';
 import '../../widgets/button/my_elevated_button.dart';
+import '../../widgets/dialog/animated_dialog.dart';
 import '../../widgets/dialog/forgot_dialog.dart';
 import '../../widgets/tag/main_tag.dart';
 import '../../widgets/text_field/my_text_field.dart';
