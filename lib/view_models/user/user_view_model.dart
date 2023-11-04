@@ -18,11 +18,11 @@ class UserViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  num _countryId = 0;
+  num? _countryId;
 
-  num get countryId => _countryId;
+  num? get countryId => _countryId;
 
-  setCountryId(num value) {
+  setCountryId(num? value) {
     _countryId = value;
     notifyListeners();
   }

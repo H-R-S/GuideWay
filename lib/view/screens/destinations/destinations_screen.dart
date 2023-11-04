@@ -26,13 +26,12 @@ class DestinationsScreen extends StatelessWidget {
                 child: Consumer<DestinationViewModel>(
                     builder: (context, value, child) {
                   return StreamBuilder<List<DestinationModel>>(
-                      stream: value.getDestinations(userViewModel.countryId),
+                      stream: value.getDestinations(userViewModel.countryId!),
                       builder: (context, snapshot) {
                         if (snapshot.hasError) {
                           debugPrint(snapshot.error.toString());
                           return ErrorContainer(
-                            description: snapshot.error.toString());
-
+                              description: snapshot.error.toString());
                         } else if (snapshot.hasData) {
                           return ListView.builder(
                               shrinkWrap: true,

@@ -35,7 +35,7 @@ class JobTimingsScreen extends StatelessWidget {
                     Consumer<RuleViewModel>(builder: (context, value, child) {
                   return StreamBuilder<List<RuleModel>>(
                       stream: value.getRules(
-                          context, "Job Timings", userViewModel.countryId),
+                          context, "Job Timings", userViewModel.countryId!),
                       builder: (context, snapshot) {
                         if (snapshot.hasError) {
                           debugPrint(snapshot.error.toString());

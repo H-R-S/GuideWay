@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "417960465048-ukr0b4caj9hk8plfiapc40n2c25i32vm.apps.googleusercontent.com",
+          "client_id": "417960465048-952k2678pcpm1pg1vsvavlkpi380ofvk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.shaheendev.guideway",
-            "certificate_hash": "51fe31104500462bd61ebc69fdfb04319529def3"
+            "certificate_hash": "491cc0ca6badb5c76ca792d6faf0510f013de648"
           }
         },
         {

@@ -37,38 +37,40 @@ class FeedBackScreen extends StatelessWidget {
             },
             child: const Icon(Icons.add)),
         appBar: MyAppBar(scaffoldKey, context, title: "FeedBack"),
-        body: Padding(
-            padding: const EdgeInsets.all(20),
-            child:
-                Consumer<FeedBackViewModel>(builder: (context, value, child) {
-              return StreamBuilder(
-                  stream: value.getFeedBacks(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) {
-                      debugPrint(snapshot.error.toString());
-                      return ErrorContainer(
-                          description: snapshot.error.toString());
-                    }
-
-                    if (snapshot.hasData) {
-                      return ListView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: snapshot.data!.length,
-                          itemBuilder: (context, index) {
-                            final feedBack = snapshot.data![index];
-
-                            return FeedBackContainer(
-                                name: feedBack.user["fullName"],
-                                dateTime:
-                                    feedBack.timestamp!.toDate().toString(),
-                                reason: feedBack.reason ?? "",
-                                feedback: feedBack.feedback ?? "");
-                          });
-                    } else {
-                      return const MyLoadingIndicator();
-                    }
-                  });
-            })));
+        body:  SingleChildScrollView(
+          child: Padding(
+              padding: const EdgeInsets.all(20),
+              child:
+                  Consumer<FeedBackViewModel>(builder: (context, value, child) {
+                return StreamBuilder(
+                    stream: value.getFeedBacks(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        debugPrint(snapshot.error.toString());
+                        return ErrorContainer(
+                            description: snapshot.error.toString());
+                      }
+        
+                      if (snapshot.hasData) {
+                        return ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: snapshot.data!.length,
+                            itemBuilder: (context, index) {
+                              final feedBack = snapshot.data![index];
+        
+                              return FeedBackContainer(
+                                  name: feedBack.user["fullName"],
+                                  dateTime:
+                                      feedBack.timestamp!.toDate().toString(),
+                                  reason: feedBack.reason ?? "",
+                                  feedback: feedBack.feedback ?? "");
+                            });
+                      } else {
+                        return const MyLoadingIndicator();
+                      }
+                    });
+              })),
+        ));
   }
 }

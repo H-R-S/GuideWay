@@ -52,81 +52,83 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
                 case Status.COMPLETED:
                   final currency = value.currencyList.data!;
 
-                  return Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Column(children: [
-                        MyTextField(
-                            header: "Amount",
-                            controller: amountController,
-                            hint: "Amount"),
-                        const SizedBox(height: 10),
-                        CurrencyDropDown(
-                            header: "From",
-                            isRequired: true,
-                            items: currency,
-                            hint: "Select Currency",
-                            onChanged: (value) {
-                              fromCurrencyController.value =
-                                  fromCurrencyController.value
-                                      .copyWith(text: value!.symbol!);
+                  return  SingleChildScrollView(
+                    child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(children: [
+                          MyTextField(
+                              header: "Amount",
+                              controller: amountController,
+                              hint: "Amount"),
+                          const SizedBox(height: 10),
+                          CurrencyDropDown(
+                              header: "From",
+                              isRequired: true,
+                              items: currency,
+                              hint: "Select Currency",
+                              onChanged: (value) {
+                                fromCurrencyController.value =
+                                    fromCurrencyController.value
+                                        .copyWith(text: value!.symbol!);
+                              }),
+                          const SizedBox(height: 20),
+                          CurrencyDropDown(
+                              header: "To",
+                              isRequired: true,
+                              items: currency,
+                              hint: "Select Currency",
+                              onChanged: (value) {
+                                toCurrencyController.value = toCurrencyController
+                                    .value
+                                    .copyWith(text: value!.symbol!);
+                              }),
+                          const SizedBox(height: 10),
+                          if (isConverted)
+                            Consumer<CurrencyViewModel>(
+                                builder: (context, value, child) {
+                              switch (value.convertCurrencyDetails.status) {
+                                case Status.ERROR:
+                                  debugPrint(
+                                      value.convertCurrencyDetails.message);
+                                  return Container();
+                  
+                                case Status.COMPLETED:
+                                  final convertedCurrency = value
+                                      .convertCurrencyDetails
+                                      .data!
+                                      .result!
+                                      .convertedAmount!;
+                  
+                                  convertedCurrencyController.value =
+                                      convertedCurrencyController.value.copyWith(
+                                          text: convertedCurrency.toString());
+                  
+                                  return MyTextField(
+                                      header: "Converted Amount",
+                                      controller: convertedCurrencyController,
+                                      hint: "Converted Amount");
+                  
+                                default:
+                                  return const MyLoadingIndicator();
+                              }
                             }),
-                        const SizedBox(height: 20),
-                        CurrencyDropDown(
-                            header: "To",
-                            isRequired: true,
-                            items: currency,
-                            hint: "Select Currency",
-                            onChanged: (value) {
-                              toCurrencyController.value = toCurrencyController
-                                  .value
-                                  .copyWith(text: value!.symbol!);
-                            }),
-                        const SizedBox(height: 10),
-                        if (isConverted)
-                          Consumer<CurrencyViewModel>(
-                              builder: (context, value, child) {
-                            switch (value.convertCurrencyDetails.status) {
-                              case Status.ERROR:
-                                debugPrint(
-                                    value.convertCurrencyDetails.message);
-                                return Container();
-
-                              case Status.COMPLETED:
-                                final convertedCurrency = value
-                                    .convertCurrencyDetails
-                                    .data!
-                                    .result!
-                                    .convertedAmount!;
-
-                                convertedCurrencyController.value =
-                                    convertedCurrencyController.value.copyWith(
-                                        text: convertedCurrency.toString());
-
-                                return MyTextField(
-                                    header: "Converted Amount",
-                                    controller: convertedCurrencyController,
-                                    hint: "Converted Amount");
-
-                              default:
-                                return const MyLoadingIndicator();
-                            }
-                          }),
-                        const SizedBox(height: 40),
-                        MyElevatedButton(
-                            title: "Convert",
-                            onTap: () {
-                              value
-                                  .getConvertCurrencyDetails(
-                                      fromCurrencyController.text,
-                                      toCurrencyController.text,
-                                      amountController.text.trim())
-                                  .then((value) {
-                                setState(() {
-                                  isConverted = true;
+                          const SizedBox(height: 40),
+                          MyElevatedButton(
+                              title: "Convert",
+                              onTap: () {
+                                value
+                                    .getConvertCurrencyDetails(
+                                        fromCurrencyController.text,
+                                        toCurrencyController.text,
+                                        amountController.text.trim())
+                                    .then((value) {
+                                  setState(() {
+                                    isConverted = true;
+                                  });
                                 });
-                              });
-                            })
-                      ]));
+                              })
+                        ])),
+                  );
 
                 default:
                   return const MyLoadingIndicator();

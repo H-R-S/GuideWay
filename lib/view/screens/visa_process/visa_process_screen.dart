@@ -12,17 +12,19 @@ class VisaProcessScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: MyAppBar(scaffoldKey, context, title: "Visa Process FAQ"),
-        body: Padding(
-            padding: const EdgeInsets.all(20),
-            child: ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: visaProcess.length,
-                itemBuilder: (context, index) {
-                  return VisaProcessContainer(
-                      title: visaProcess[index]["title"],
-                      subTitle: visaProcess[index]["subTitle"],
-                      icon: visaProcess[index]["icon"]);
-                })));
+        body: SingleChildScrollView(
+          child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: visaProcess.length,
+                  itemBuilder: (context, index) {
+                    return VisaProcessContainer(
+                        title: visaProcess[index]["title"],
+                        subTitle: visaProcess[index]["subTitle"],
+                        icon: visaProcess[index]["icon"]);
+                  })),
+        ));
   }
 }

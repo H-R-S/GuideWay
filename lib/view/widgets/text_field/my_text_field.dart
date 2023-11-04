@@ -71,9 +71,7 @@ class _MyTextFieldState extends State<MyTextField> {
               cursorColor: primary,
               controller: widget.controller,
               decoration: InputDecoration(
-                  contentPadding: widget.contentPadding != null
-                      ? EdgeInsets.all(widget.contentPadding!)
-                      : null,
+                  contentPadding: const EdgeInsets.all(10),
                   suffixIcon: widget.isPassword
                       ? IconButton(
                           onPressed: () {

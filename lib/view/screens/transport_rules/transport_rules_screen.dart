@@ -39,7 +39,7 @@ class TransportRulesScreen extends StatelessWidget {
                     Consumer<RuleViewModel>(builder: (context, value, child) {
                   return StreamBuilder<List<RuleModel>>(
                       stream: value.getRules(
-                          context, "Transport Rules", userViewModel.countryId),
+                          context, "Transport Rules", userViewModel.countryId!),
                       builder: (context, snapshot) {
                         if (snapshot.hasError) {
                           debugPrint(snapshot.error.toString());

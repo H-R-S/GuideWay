@@ -30,7 +30,7 @@ class WeeklyWeatherContainer extends StatelessWidget {
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           SizedBox(width: width * 0.3, child: Text(day, style: style)),
-          SizedBox(width: width * 0.3, child: Image.asset(icon, height: 40)),
+          SizedBox(width: width * 0.2, child: Image.asset(icon, height: 40)),
           SizedBox(
               width: width * 0.3,
               child: Row(mainAxisSize: MainAxisSize.min, children: [

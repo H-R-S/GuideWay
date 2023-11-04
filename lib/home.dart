@@ -42,7 +42,7 @@ class _HomeState extends State<Home> {
     List<Widget> screens = [
       HomeScreen(),
       VisaProcessScreen(),
-      ScannerScreen(),
+      const ScannerScreen(),
       ChatScreen(),
       SettingsScreen()
     ];

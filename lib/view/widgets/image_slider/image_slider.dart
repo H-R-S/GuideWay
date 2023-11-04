@@ -33,7 +33,7 @@ class ImageSlider extends StatelessWidget {
           itemBuilder: (context, index, realIndex) {
             return InkWell(
                 onTap: onTap,
-                child: Image.asset(items[index],
+                child: Image.network(items[index],
                     fit: BoxFit.cover,
                     width: double.infinity,
                     filterQuality: FilterQuality.high,

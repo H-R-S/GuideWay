@@ -6,14 +6,12 @@ class WeatherModel {
   WeatherModel({this.location, this.current, this.forecast});
 
   WeatherModel.fromJson(Map<String, dynamic> json) {
-    location = json['location'] != null
-        ? Location.fromJson(json['location'])
-        : null;
+    location =
+        json['location'] != null ? Location.fromJson(json['location']) : null;
     current =
         json['current'] != null ? Current.fromJson(json['current']) : null;
-    forecast = json['forecast'] != null
-        ? Forecast.fromJson(json['forecast'])
-        : null;
+    forecast =
+        json['forecast'] != null ? Forecast.fromJson(json['forecast']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -32,14 +30,14 @@ class WeatherModel {
 }
 
 class Location {
-  String? name;
-  String? region;
-  String? country;
+  dynamic name;
+  dynamic region;
+  dynamic country;
   double? lat;
   double? lon;
-  String? tzId;
+  dynamic tzId;
   num? localtimeEpoch;
-  String? localtime;
+  dynamic localtime;
 
   Location(
       {this.name,
@@ -78,7 +76,7 @@ class Location {
 
 class Current {
   num? lastUpdatedEpoch;
-  String? lastUpdated;
+  dynamic lastUpdated;
   num? tempC;
   double? tempF;
   num? isDay;
@@ -86,7 +84,7 @@ class Current {
   double? windMph;
   double? windKph;
   num? windDegree;
-  String? windDir;
+  dynamic windDir;
   num? pressureMb;
   double? pressureIn;
   num? precipMm;
@@ -186,8 +184,8 @@ class Current {
 }
 
 class Condition {
-  String? text;
-  String? icon;
+  dynamic text;
+  dynamic icon;
   num? code;
 
   Condition({this.text, this.icon, this.code});
@@ -231,7 +229,7 @@ class Forecast {
 }
 
 class Forecastday {
-  String? date;
+  dynamic date;
   num? dateEpoch;
   Day? day;
   Astro? astro;
@@ -367,12 +365,12 @@ class Day {
 }
 
 class Astro {
-  String? sunrise;
-  String? sunset;
-  String? moonrise;
-  String? moonset;
-  String? moonPhase;
-  String? moonIllumination;
+  dynamic sunrise;
+  dynamic sunset;
+  dynamic moonrise;
+  dynamic moonset;
+  dynamic moonPhase;
+  dynamic moonIllumination;
   num? isMoonUp;
   num? isSunUp;
 
@@ -413,7 +411,7 @@ class Astro {
 
 class Hour {
   num? timeEpoch;
-  String? time;
+  dynamic time;
   double? tempC;
   double? tempF;
   num? isDay;
@@ -421,7 +419,7 @@ class Hour {
   double? windMph;
   double? windKph;
   num? windDegree;
-  String? windDir;
+  dynamic windDir;
   num? pressureMb;
   double? pressureIn;
   num? precipMm;

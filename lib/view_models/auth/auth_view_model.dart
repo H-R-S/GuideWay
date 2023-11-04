@@ -4,6 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:guide_way/view/widgets/loading_indicator/my_loading_indicator.dart';
 import 'package:twitter_login/twitter_login.dart';
 import '../../models/user/user_model.dart';
 import '../../routes/routes_name.dart';
@@ -218,7 +219,7 @@ class AuthViewModel with ChangeNotifier {
     showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) => const CircularProgressIndicator());
+        builder: (context) => const MyLoadingIndicator());
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
       setLoading(false);

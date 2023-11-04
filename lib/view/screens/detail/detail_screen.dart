@@ -6,7 +6,7 @@ import '../../widgets/app_bar/my_app_bar.dart';
 import '../../widgets/button/my_elevated_button.dart';
 import '../../widgets/google_map/google_map_container.dart';
 import '../../widgets/image_slider/image_slider.dart';
-import '../web_view/web_view_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailScreen extends StatelessWidget {
   final String? title, description, website, latitude, longitude;
@@ -40,20 +40,14 @@ class DetailScreen extends StatelessWidget {
 
     return Scaffold(
         appBar: MyAppBar(scaffoldKey, context, title: title),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: isWebsite
-            ? Padding(
-                padding: const EdgeInsets.all(20),
+        persistentFooterButtons: [
+          if (isWebsite)
+            Padding(
+                padding: const EdgeInsets.all(10),
                 child: MyElevatedButton(
                     title: "Visit Website",
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => WebViewScreen(
-                                  url: website, title: title ?? "")));
-                    }))
-            : null,
+                    onTap: () => _launchInWebView(website ?? "www.google.com")))
+        ],
         body: SingleChildScrollView(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -77,5 +71,11 @@ class DetailScreen extends StatelessWidget {
                     const SizedBox(height: 40)
                   ]))
         ])));
+  }
+
+  Future<void> _launchInWebView(String url) async {
+    if (!await launchUrl(Uri.parse(url), mode: LaunchMode.inAppWebView)) {
+      throw Exception('Could not launch $url');
+    }
   }
 }

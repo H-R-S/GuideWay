@@ -25,9 +25,10 @@ class UniversityViewModel with ChangeNotifier {
     });
   }
 
-  Stream<List<UniversityModel>> getUniversities() {
-    final universitiesCollection =
-        FirebaseFirestore.instance.collection("universities");
+  Stream<List<UniversityModel>> getUniversities(num countryId) {
+    final universitiesCollection = FirebaseFirestore.instance
+        .collection("universities")
+        .where("countryId", isEqualTo: countryId);
 
     return universitiesCollection.snapshots().map((querySnapshot) =>
         querySnapshot.docs

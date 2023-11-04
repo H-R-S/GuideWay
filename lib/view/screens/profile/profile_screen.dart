@@ -20,62 +20,66 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: MyAppBar(scaffoldKey, context, title: "Profile"),
-        body: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Consumer<UserViewModel>(builder: (context, value, child) {
-              return FutureBuilder<UserModel?>(
-                  future: value.getUser(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) {
-                      debugPrint(snapshot.error.toString());
-                      return Container();
-                    } else if (snapshot.hasData) {
-                      final user = snapshot.data!;
+        body: SingleChildScrollView(
+          child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Consumer<UserViewModel>(builder: (context, value, child) {
+                return FutureBuilder<UserModel?>(
+                    future: value.getUser(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        debugPrint(snapshot.error.toString());
+                        return Container();
+                      } else if (snapshot.hasData) {
+                        final user = snapshot.data!;
 
-                      usernameController.value = usernameController.value
-                          .copyWith(text: user.username);
-                      emailController.value =
-                          emailController.value.copyWith(text: user.email);
-                      emailController.value =
-                          emailController.value.copyWith(text: user.email);
-                      dobController.value =
-                          dobController.value.copyWith(text: user.dob);
+                        usernameController.value = usernameController.value
+                            .copyWith(text: user.username);
+                        emailController.value =
+                            emailController.value.copyWith(text: user.email);
+                        emailController.value =
+                            emailController.value.copyWith(text: user.email);
+                        dobController.value =
+                            dobController.value.copyWith(text: user.dob);
 
-                      return Column(children: [
-                        MyTextField(
-                            header: "Username",
-                            controller: usernameController,
-                            hint: "Username"),
-                        MyTextField(
-                            header: "Full Name",
-                            controller: fullnameController,
-                            hint: "Full Name"),
-                        MyTextField(
-                            isReadable: true,
-                            header: "Email",
-                            controller: emailController,
-                            hint: "Email"),
-                        MyTextField(
-                            header: "DOB",
-                            controller: dobController,
-                            hint: "Date of Birth"),
-                        const SizedBox(height: 40),
-                        MyElevatedButton(
-                            isLoading: value.loading,
-                            title: "Update",
-                            onTap: () {
-                              value.updateUserInfo(
-                                  context,
-                                  UserModel(
-                                      username: usernameController.text.trim(),
-                                      fullName: fullnameController.text.trim(),
-                                      dob: dobController.text.trim()));
-                            })
-                      ]);
-                    } else {
-                      return const CircularProgressIndicator();
-                    }
-                  });
-            })));
+                        return Column(children: [
+                          MyTextField(
+                              header: "Username",
+                              controller: usernameController,
+                              hint: "Username"),
+                          MyTextField(
+                              header: "Full Name",
+                              controller: fullnameController,
+                              hint: "Full Name"),
+                          MyTextField(
+                              isReadable: true,
+                              header: "Email",
+                              controller: emailController,
+                              hint: "Email"),
+                          MyTextField(
+                              header: "DOB",
+                              controller: dobController,
+                              hint: "Date of Birth"),
+                          const SizedBox(height: 40),
+                          MyElevatedButton(
+                              isLoading: value.loading,
+                              title: "Update",
+                              onTap: () {
+                                value.updateUserInfo(
+                                    context,
+                                    UserModel(
+                                        username:
+                                            usernameController.text.trim(),
+                                        fullName:
+                                            fullnameController.text.trim(),
+                                        dob: dobController.text.trim()));
+                              })
+                        ]);
+                      } else {
+                        return const CircularProgressIndicator();
+                      }
+                    });
+              })),
+        ));
   }
 }

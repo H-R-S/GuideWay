@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:guide_way/resources/constants/style.dart';
 import 'package:provider/provider.dart';
-
 import '../../../theme/theme_provider.dart';
 
 class ImageContainer extends StatelessWidget {
@@ -24,7 +23,7 @@ class ImageContainer extends StatelessWidget {
 
     final style = TextStyle(
         color: isDark ? Colors.white : null,
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: FontWeight.bold);
 
     return Padding(
@@ -32,6 +31,7 @@ class ImageContainer extends StatelessWidget {
         child: InkWell(
             onTap: onTap,
             child: Container(
+                height: 150,
                 decoration: BoxDecoration(
                     color: isDark ? dark : Colors.white,
                     boxShadow: [
@@ -50,7 +50,8 @@ class ImageContainer extends StatelessWidget {
                       child: SizedBox(
                           width: 120,
                           height: 150,
-                          child: Image.asset(image ?? "", fit: BoxFit.cover))),
+                          child:
+                              Image.network(image ?? "", fit: BoxFit.cover))),
                   const SizedBox(width: 10),
                   Expanded(
                       child: Padding(
@@ -58,15 +59,17 @@ class ImageContainer extends StatelessWidget {
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(name ?? "", style: style),
-                                const SizedBox(height: 10),
+                                Text(name ?? "",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: style),
+                                // const SizedBox(height: 5),
                                 if (description != null)
                                   Text(description ?? "",
-                                      maxLines: 2,
+                                      maxLines: 3,
                                       overflow: TextOverflow.ellipsis,
                                       style: style.copyWith(
                                           fontWeight: FontWeight.normal,
-                                          fontSize: 16)),
+                                          fontSize: 14)),
                                 if (city != null)
                                   Row(
                                       mainAxisAlignment:

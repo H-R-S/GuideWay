@@ -34,7 +34,7 @@ class AirportRulesScreen extends StatelessWidget {
                 child:
                     Consumer<RuleViewModel>(builder: (context, value, child) {
                   return StreamBuilder<List<RuleModel>>(
-                      stream: value.getRules(context, "Airport Rules", userViewModel.countryId),
+                      stream: value.getRules(context, "Airport Rules", userViewModel.countryId!),
                       builder: (context, snapshot) {
                         if (snapshot.hasError) {
                           debugPrint(snapshot.error.toString());

@@ -88,10 +88,21 @@ class SignUpScreen extends StatelessWidget {
                           Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                MyCircleButton(icon: googleIcon, onTap: () {}),
                                 MyCircleButton(
-                                    icon: facebookIcon, onTap: () {}),
-                                MyCircleButton(icon: twitterIcon, onTap: () {})
+                                    icon: googleIcon,
+                                    onTap: () {
+                                      authViewModel.signInWithGoogle(context);
+                                    }),
+                                MyCircleButton(
+                                    icon: facebookIcon,
+                                    onTap: () {
+                                      authViewModel.signInWithFacebook(context);
+                                    }),
+                                MyCircleButton(
+                                    icon: twitterIcon,
+                                    onTap: () {
+                                      authViewModel.signInWithTwitter(context);
+                                    })
                               ])
                         ])))));
   }

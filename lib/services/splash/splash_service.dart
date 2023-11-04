@@ -12,9 +12,9 @@ class SplashService {
     final userViewModel = Provider.of<UserViewModel>(context, listen: false);
 
     getCountryId().then((value) {
-      userViewModel.setCountryId(value!.countryId!);
-      debugPrint(value.countryId.toString());
-      if (value.countryId == null) {
+      userViewModel.setCountryId(value?.countryId);
+      // debugPrint(value.countryId.toString());
+      if (value?.countryId == null) {
         return Navigator.of(context, rootNavigator: true)
             .pushReplacementNamed(RoutesName.country);
       } else {
@@ -23,7 +23,7 @@ class SplashService {
       }
     }).onError((error, stackTrace) {
       if (kDebugMode) {
-        print(error.toString());
+        print("error: ${error.toString()}");
       }
       return null;
     });

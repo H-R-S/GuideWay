@@ -24,23 +24,23 @@ class DrivingRulesScreen extends StatelessWidget {
         fontSize: 18,
         fontWeight: FontWeight.normal);
 
-     final userViewModel = Provider.of<UserViewModel>(context);
+    final userViewModel = Provider.of<UserViewModel>(context);
 
-      return Scaffold(
+    return Scaffold(
         appBar: MyAppBar(scaffoldKey, context, title: "Driving Rules"),
-         body: SingleChildScrollView(
+        body: SingleChildScrollView(
             child: Padding(
                 padding: const EdgeInsets.all(20),
                 child:
                     Consumer<RuleViewModel>(builder: (context, value, child) {
                   return StreamBuilder<List<RuleModel>>(
-                      stream: value.getRules(context, "Driving Rules", userViewModel.countryId),
+                      stream: value.getRules(
+                          context, "Driving Rules", userViewModel.countryId!),
                       builder: (context, snapshot) {
                         if (snapshot.hasError) {
                           debugPrint(snapshot.error.toString());
                           return ErrorContainer(
-                            description: snapshot.error.toString());
-
+                              description: snapshot.error.toString());
                         } else if (snapshot.hasData) {
                           return ListView.builder(
                               shrinkWrap: true,

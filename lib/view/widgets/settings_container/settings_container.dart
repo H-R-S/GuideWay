@@ -43,7 +43,7 @@ class _SettingsContainerState extends State<SettingsContainer> {
         child: InkWell(
             onTap: widget.onTap,
             child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -60,9 +60,7 @@ class _SettingsContainerState extends State<SettingsContainer> {
                                 children: [
                                   Text(widget.title ?? "",
                                       style: TextStyle(
-                                          color: isDark
-                                              ? Colors.white
-                                              : null,
+                                          color: isDark ? Colors.white : null,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 18)),
                                   SizedBox(

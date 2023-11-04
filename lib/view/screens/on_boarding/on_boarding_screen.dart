@@ -12,7 +12,7 @@ class OnBoardingScreen extends StatelessWidget {
         title: "Explore the world like a local with GuideWay!",
         subTitle:
             "Discover hidden gems and immerse yourself in the culture of your destination with the help of our expert tour guides.",
-        image: onBoarding02),
+        image: onBoarding01),
     OnBoardingModel(
         title: "Travel made easy with GuideWay!",
         subTitle:
@@ -22,7 +22,7 @@ class OnBoardingScreen extends StatelessWidget {
         title: "Join the journey with GuideWay!",
         subTitle:
             'Connect with like-minded travelers, share your experiences, and make memories that last a lifetime with GuideWay`s vibrant community.',
-        image: onBoarding02)
+        image: onBoarding03)
   ];
 
   @override

@@ -20,7 +20,7 @@ class OnBoardContainer extends StatelessWidget {
 
     return Column(children: [
       Container(
-        height: 400,
+        height: 350,
         width: double.infinity,
         decoration: const BoxDecoration(
             color: Colors.grey,
@@ -32,7 +32,7 @@ class OnBoardContainer extends StatelessWidget {
                 borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(30),
                     bottomRight: Radius.circular(30)),
-                child: Image.asset(image!, fit: BoxFit.cover))
+                child: Image.asset(image!, fit: BoxFit.fill))
             : const Placeholder(),
       ),
       const Spacer(),
@@ -43,7 +43,7 @@ class OnBoardContainer extends StatelessWidget {
               Text(title!,
                   textAlign: TextAlign.center,
                   style: style.copyWith(
-                      fontWeight: FontWeight.bold, fontSize: 28)),
+                      fontWeight: FontWeight.bold, fontSize: 20)),
             const SizedBox(height: 20),
             if (subTitle != null)
               Text(subTitle!,

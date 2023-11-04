@@ -48,17 +48,18 @@ class ProfileContainer extends StatelessWidget {
                   backgroundColor: Colors.white,
                   backgroundImage: AssetImage(personIcon)),
               const SizedBox(width: 20),
-              FittedBox(
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                    Text(name, style: style),
-                    const SizedBox(height: 5),
-                    Text(userName,
-                        style: style.copyWith(fontWeight: FontWeight.normal)),
-                    const SizedBox(height: 5),
-                    Text(email, style: style)
-                  ]))
+              Expanded(
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(name, style: style),
+                      const SizedBox(height: 5),
+                      Text(userName,
+                          style: style.copyWith(fontWeight: FontWeight.normal)),
+                      const SizedBox(height: 5),
+                      Text(email, overflow: TextOverflow.ellipsis, style: style)
+                    ]),
+              )
             ])));
   }
 }

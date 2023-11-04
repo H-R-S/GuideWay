@@ -21,40 +21,42 @@ class ChangePasswordScreen extends StatelessWidget {
 
     return Scaffold(
         appBar: MyAppBar(scaffoldKey, context, title: "Change Password"),
-        body: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(children: [
-              MyTextField(
-                  header: "Last Password",
-                  isRequired: true,
-                  isPassword: true,
-                  isVisible: true,
-                  controller: lastPasswordController,
-                  hint: "Last Password"),
-              MyTextField(
-                  header: "New Password",
-                  isRequired: true,
-                  isPassword: true,
-                  isVisible: true,
-                  controller: newPasswordController,
-                  hint: "New Password"),
-              MyTextField(
-                  header: "Confirm Password",
-                  isRequired: true,
-                  isPassword: true,
-                  isVisible: true,
-                  controller: confirmPasswordController,
-                  hint: "Confirm Password"),
-              const SizedBox(height: 40),
-              MyElevatedButton(
-                  isLoading: authViewModel.loading,
-                  title: "Change Password",
-                  onTap: () {
-                    authViewModel.changePassword(
-                        context,
-                        lastPasswordController.text.trim(),
-                        newPasswordController.text.trim());
-                  })
-            ])));
+        body: SingleChildScrollView(
+          child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(children: [
+                MyTextField(
+                    header: "Last Password",
+                    isRequired: true,
+                    isPassword: true,
+                    isVisible: true,
+                    controller: lastPasswordController,
+                    hint: "Last Password"),
+                MyTextField(
+                    header: "New Password",
+                    isRequired: true,
+                    isPassword: true,
+                    isVisible: true,
+                    controller: newPasswordController,
+                    hint: "New Password"),
+                MyTextField(
+                    header: "Confirm Password",
+                    isRequired: true,
+                    isPassword: true,
+                    isVisible: true,
+                    controller: confirmPasswordController,
+                    hint: "Confirm Password"),
+                const SizedBox(height: 40),
+                MyElevatedButton(
+                    isLoading: authViewModel.loading,
+                    title: "Change Password",
+                    onTap: () {
+                      authViewModel.changePassword(
+                          context,
+                          lastPasswordController.text.trim(),
+                          newPasswordController.text.trim());
+                    })
+              ])),
+        ));
   }
 }

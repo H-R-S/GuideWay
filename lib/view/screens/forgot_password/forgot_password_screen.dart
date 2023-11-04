@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../widgets/button/my_elevated_button.dart';
-import '../../widgets/dialog/animated_dialog.dart';
-import '../../widgets/dialog/forgot_dialog.dart';
 import '../../widgets/tag/main_tag.dart';
 import '../../widgets/text_field/my_text_field.dart';
+import '../../../view_models/auth/auth_view_model.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordScreen({super.key});
@@ -12,6 +12,8 @@ class ForgotPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authViewModel = Provider.of<AuthViewModel>(context);
+
     return Scaffold(
         appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0),
         body: Padding(
@@ -26,10 +28,8 @@ class ForgotPasswordScreen extends StatelessWidget {
               MyElevatedButton(
                   title: "Reset Password",
                   onTap: () {
-                    AnimatedDialog(
-                        context: context,
-                        endOffSet: const Offset(0, 0),
-                        child: const ForgotDialog());
+                    authViewModel.resetPassword(
+                        emailController.text.trim(), context);
                   })
             ])));
   }
